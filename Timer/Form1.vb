@@ -243,13 +243,13 @@ Public Class Form1
                                             ButtonSize)
 
 
-            If ClientSize.Height / 25 > 8 Then
+            If ClientSize.Height / 25 > 10 Then
 
                 FontSize = ClientSize.Height / 25
 
             Else
 
-                FontSize = 8
+                FontSize = 10
 
             End If
 
