@@ -31,7 +31,6 @@
 Imports System.ComponentModel
 Imports System.Drawing.Drawing2D
 Imports System.IO
-Imports System.Media
 Imports System.Runtime.InteropServices
 Imports System.Text
 
@@ -382,7 +381,6 @@ Public Class Form1
 
         UpdateMainDisplay()
 
-
     End Sub
 
     Private Sub DrawDisplays()
@@ -393,18 +391,16 @@ Public Class Form1
 
                 With Buffer.Graphics
 
-
                     Select Case TimerState
                         Case AppState.Completed
-                            .Clear(Color.LightSkyBlue)
-                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.MidnightBlue, MainDisplay.Location, AlineCenterMiddle)
 
-                            'FillRoundedRectangle(Brushes.White, StopButton.Rect,)
+                            .Clear(Color.LightSkyBlue)
+
+                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.MidnightBlue, MainDisplay.Location, AlineCenterMiddle)
 
                             FillRoundedRectangle(Brushes.White, StopButton.Rect, StopButton.Radius, Buffer.Graphics)
 
                             .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
-
 
                         Case AppState.Running
                             .Clear(Color.Black)
