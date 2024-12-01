@@ -91,6 +91,10 @@ Public Class Form1
 
     Private RestartButton As ButtonStruct
 
+    Private ElapsedTime As TimeSpan
+
+
+
 
 
     Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
@@ -317,6 +321,35 @@ Public Class Form1
 
     End Sub
 
+
+
+
+
+    Private Sub TogglePause()
+
+        If TimerState = AppState.Running Then
+
+            TimerState = AppState.Paused
+
+            ' Store the elapsed time to resume from the same point
+            ElapsedTime = DateTime.Now - StartTime
+
+        ElseIf TimerState = AppState.Paused Then
+
+            TimerState = AppState.Running
+
+            ' Adjust the start time based on the paused duration
+            StartTime = DateTime.Now - ElapsedTime
+
+        End If
+
+    End Sub
+
+
+
+
+
+
     Private Sub UpdateDisplays()
 
         UpdateMainDisplay()
@@ -435,7 +468,7 @@ Public Class Form1
 
             Case AppState.Running
 
-                Dim ElapsedTime As TimeSpan = DateTime.Now - StartTime
+                ElapsedTime = DateTime.Now - StartTime
 
                 Dim RemainingTime As TimeSpan = Duration - ElapsedTime
 
@@ -504,6 +537,29 @@ Public Class Form1
                     InitialDisplay.Text = "00h " & "00m " & "00s"
 
                 End If
+
+
+            Case AppState.Paused
+
+                If Duration.Hours > 0 Then
+
+                    MainDisplay.Text = Duration.ToString("h\:mm\:ss")
+
+                Else
+
+                    If Duration.Minutes > 0 Then
+
+                        MainDisplay.Text = Duration.ToString("m\:ss")
+
+                    Else
+
+                        MainDisplay.Text = Duration.Seconds.ToString
+
+
+                    End If
+
+                End If
+
 
         End Select
 
@@ -950,6 +1006,12 @@ Public Class Form1
                     TimerState = AppState.Initial
 
                 End If
+
+
+            Case Keys.Pause
+
+
+                TogglePause()
 
             Case Keys.D0
 
