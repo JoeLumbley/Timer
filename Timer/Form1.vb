@@ -138,8 +138,20 @@ Public Class Form1
 
         If Not WindowState = FormWindowState.Minimized Then
 
+
+            Dim FontSize As Single
+
+            If ClientSize.Height / 10 > 30 Then
+
+                FontSize = ClientSize.Height / 10
+
+            Else
+
+                FontSize = 30
+
+            End If
+
             ' Set the font size for the main display based on the width of the client rectangle
-            Dim FontSize As Single = ClientSize.Width / 14
             MainDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
 
             ' Center the main display in the client rectangle.
@@ -148,13 +160,13 @@ Public Class Form1
             MainDisplay.Location.Y = ClientSize.Height / 2
 
 
-            If ClientSize.Height / 25 > 8 Then
+            If ClientSize.Height / 25 > 10 Then
 
                 FontSize = ClientSize.Height / 25
 
             Else
 
-                FontSize = 8
+                FontSize = 10
 
             End If
 
@@ -193,35 +205,61 @@ Public Class Form1
 
 
             RestartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                            ClientSize.Height / 2 + ClientSize.Width / 15,
+                                            ClientSize.Height / 2 + ButtonSize,
                                             ButtonSize,
                                             ButtonSize)
 
 
-            FontSize = ClientSize.Width / 75
+
+
+
+
+
+            If ClientSize.Height / 25 > 10 Then
+
+                FontSize = ClientSize.Height / 25
+
+            Else
+
+                FontSize = 10
+
+            End If
+
+            'FontSize = ClientSize.Width / 75
             RestartButton.Font = New Font("Segoe UI Symbol", FontSize, FontStyle.Regular)
 
             RestartButton.TextLocation = New Point(RestartButton.Rect.X + RestartButton.Rect.Width / 2, RestartButton.Rect.Y + RestartButton.Rect.Height / 2)
 
 
-            RestartButton.Radius = ClientSize.Width / 60
+            RestartButton.Radius = ClientSize.Height / 30
 
 
 
 
 
             StopButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                            ClientSize.Height / 2 + ClientSize.Width / 15,
+                                            ClientSize.Height / 2 + ButtonSize,
                                             ButtonSize,
                                             ButtonSize)
 
-            FontSize = ClientSize.Width / 85
+
+            If ClientSize.Height / 25 > 8 Then
+
+                FontSize = ClientSize.Height / 25
+
+            Else
+
+                FontSize = 8
+
+            End If
+
+            'FontSize = ClientSize.Width / 85
             StopButton.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
 
             StopButton.TextLocation = New Point(StopButton.Rect.X + StopButton.Rect.Width / 2, StopButton.Rect.Y + StopButton.Rect.Height / 2)
 
 
-            StopButton.Radius = ClientSize.Width / 60
+            StopButton.Radius = ClientSize.Height / 30
 
 
 
@@ -247,7 +285,7 @@ Public Class Form1
             StartButton.TextLocation = New Point(StartButton.Rect.X + StartButton.Rect.Width / 2, StartButton.Rect.Y + StartButton.Rect.Height / 2)
 
 
-            StartButton.Radius = ClientSize.Width / 60
+            StartButton.Radius = ClientSize.Height / 30
 
 
 
