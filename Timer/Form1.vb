@@ -109,21 +109,11 @@ Public Class Form1
 
         SetVolume("timesup", 800)
 
-        'StopButton.Font = EmojiFont
-
         StopButton.Text = "■"
 
         StartButton.Text = "▶"
 
         RestartButton.Text = "▶"
-
-
-        'StopButton.Rect = New Rectangle(0, 0, 200, 90)
-
-
-        'TopDisplay.Type = InfoType.LongDayOfWeek
-
-        'BottomDisplay.Type = InfoType.MedDate
 
         Timer1.Interval = 15
 
@@ -136,7 +126,6 @@ Public Class Form1
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
         If Not WindowState = FormWindowState.Minimized Then
-
 
             Dim FontSize As Single
 
@@ -155,9 +144,7 @@ Public Class Form1
 
             ' Center the main display in the client rectangle.
             MainDisplay.Location.X = ClientSize.Width / 2
-            'MainDisplay.Location.Y = (ClientSize.Height + MenuStrip1.Height) / 2
             MainDisplay.Location.Y = ClientSize.Height / 2
-
 
             If ClientSize.Height / 25 > 10 Then
 
@@ -181,38 +168,19 @@ Public Class Form1
 
             End If
 
-
             InitialDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
             InitialDisplay.Location.X = ClientSize.Width / 2
             InitialDisplay.Location.Y = ClientSize.Height / 2 - ButtonSize
-
-
 
             ' Set the font size for the top and bottom display based on the width of the client rectangle
             FontSize = ClientSize.Width / 41
             TopDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
             BottomDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
 
-            ' Center the top display in the client rectangle above the main display.
-            'StopButton.Rect.X = ClientSize.Width / 2
-            'StopButton.Rect.Y = ClientSize.Height / 2 - ClientSize.Width / 10
-
-
-
-
-
-
-
             RestartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
                                             ClientSize.Height / 2 + ButtonSize,
                                             ButtonSize,
                                             ButtonSize)
-
-
-
-
-
-
 
             If ClientSize.Height / 25 > 10 Then
 
@@ -229,18 +197,12 @@ Public Class Form1
 
             RestartButton.TextLocation = New Point(RestartButton.Rect.X + RestartButton.Rect.Width / 2, RestartButton.Rect.Y + RestartButton.Rect.Height / 2)
 
-
             RestartButton.Radius = ClientSize.Height / 30
-
-
-
-
 
             StopButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
                                             ClientSize.Height / 2 + ButtonSize,
                                             ButtonSize,
                                             ButtonSize)
-
 
             If ClientSize.Height / 25 > 10 Then
 
@@ -257,16 +219,12 @@ Public Class Form1
 
             StopButton.TextLocation = New Point(StopButton.Rect.X + StopButton.Rect.Width / 2, StopButton.Rect.Y + StopButton.Rect.Height / 2)
 
-
             StopButton.Radius = ClientSize.Height / 30
-
-
 
             StartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
                                              ClientSize.Height / 2 - ButtonSize / 2,
                                              ButtonSize,
                                              ButtonSize)
-
 
             If ClientSize.Height / 30 > 8 Then
 
@@ -283,24 +241,7 @@ Public Class Form1
 
             StartButton.TextLocation = New Point(StartButton.Rect.X + StartButton.Rect.Width / 2, StartButton.Rect.Y + StartButton.Rect.Height / 2)
 
-
             StartButton.Radius = ClientSize.Height / 30
-
-
-
-
-
-
-
-
-
-            '' Center the top display in the client rectangle above the main display.
-            'TopDisplay.Location.X = ClientSize.Width / 2
-            'TopDisplay.Location.Y = (ClientSize.Height + MenuStrip1.Height) / 2 - ClientSize.Width / 10
-
-            '' Center the bottom display in the client rectangle below the main display.
-            'BottomDisplay.Location.X = ClientSize.Width / 2
-            'BottomDisplay.Location.Y = (ClientSize.Height + MenuStrip1.Height) / 2 + ClientSize.Width / 10
 
             ' Dispose of the existing buffer
             If Buffer IsNot Nothing Then
@@ -340,7 +281,6 @@ Public Class Form1
                     PauseSound("timesup")
 
                 End If
-
 
         End Select
 
@@ -392,6 +332,7 @@ Public Class Form1
                 With Buffer.Graphics
 
                     Select Case TimerState
+
                         Case AppState.Completed
 
                             .Clear(Color.LightSkyBlue)
@@ -403,6 +344,7 @@ Public Class Form1
                             .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
 
                         Case AppState.Running
+
                             .Clear(Color.Black)
 
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
@@ -416,7 +358,6 @@ Public Class Form1
                             FillRoundedRectangle(Brushes.White, RestartButton.Rect, RestartButton.Radius, Buffer.Graphics)
 
                             .DrawString(RestartButton.Text, RestartButton.Font, Brushes.Black, RestartButton.TextLocation, AlineCenterMiddle)
-
 
                         Case AppState.Initial
 
@@ -434,19 +375,9 @@ Public Class Form1
 
                                 .DrawString(InitialDisplay.Text, InitialDisplay.Font, Brushes.LightGray, InitialDisplay.Location, AlineCenterMiddle)
 
-                                'FillRoundedRectangle(Brushes.DimGray, StartButton.Rect, StartButton.Radius, Buffer.Graphics)
-
-                                '.DrawString(StartButton.Text, StartButton.Font, Brushes.Black, StartButton.TextLocation, AlineCenterMiddle)
-
                             End If
 
                     End Select
-
-                    '.DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
-
-                    '.DrawString(TopDisplay.Text, TopDisplay.Font, Brushes.LightGray, TopDisplay.Location, AlineCenterMiddle)
-
-                    '.DrawString(BottomDisplay.Text, BottomDisplay.Font, Brushes.LightGray, BottomDisplay.Location, AlineCenterMiddle)
 
                 End With
 
@@ -465,10 +396,6 @@ Public Class Form1
     End Sub
 
     Private Sub FillRoundedRectangle(brush As Brush, Rect As Rectangle, radius As Integer, g As Graphics)
-
-        'g.CompositingMode = CompositingMode.SourceOver
-
-        'g.SmoothingMode = SmoothingMode.AntiAlias
 
         Dim Path As New GraphicsPath()
 
@@ -500,14 +427,9 @@ Public Class Form1
 
         g.FillPath(brush, Path)
 
-        'g.CompositingMode = CompositingMode.SourceCopy
-
-        'g.SmoothingMode = SmoothingMode.None
-
     End Sub
 
     Private Sub UpdateMainDisplay()
-
 
         Select Case TimerState
 
@@ -516,7 +438,6 @@ Public Class Form1
                 Dim ElapsedTime As TimeSpan = DateTime.Now - StartTime
 
                 Dim RemainingTime As TimeSpan = Duration - ElapsedTime
-
 
                 If RemainingTime.Hours > 0 Then
 
@@ -532,22 +453,14 @@ Public Class Form1
 
                         MainDisplay.Text = RemainingTime.Seconds.ToString
 
-
                     End If
 
                 End If
-
-
-
-
-                'MainDisplay.Text = RemainingTime.ToString("hh\:mm\:ss")
 
                 ' Check if timer should complete
                 If ElapsedTime.TotalSeconds >= Duration.TotalSeconds Then
 
                     TimerState = AppState.Completed
-
-                    'SetState(TimerState.Completed)
 
                 End If
 
@@ -574,8 +487,6 @@ Public Class Form1
 
             Case AppState.Initial
 
-                'MainDisplay.Text = InitialEntry.PadLeft(6, "0"c)
-
                 If Not InitialEntry = String.Empty Then
 
                     ' Ensure the input string is padded to at least 6 digits
@@ -586,16 +497,7 @@ Public Class Form1
                     Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
                     Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
 
-
                     InitialDisplay.Text = hours.ToString.PadLeft(2, "0"c) & "h " & minutes.ToString.PadLeft(2, "0"c) & "m " & seconds.ToString.PadLeft(2, "0"c) & "s"
-
-
-                    ' Create and return the TimeSpan
-                    'Duration = New TimeSpan(hours, minutes, seconds)
-
-                    'TimerState = AppState.Running
-
-                    'StartTime = Now
 
                 Else
 
@@ -604,11 +506,6 @@ Public Class Form1
                 End If
 
         End Select
-
-
-
-
-
 
     End Sub
 
@@ -625,8 +522,6 @@ Public Class Form1
         Text = "Timer🕒 - Code with Joe"
 
         Me.WindowState = FormWindowState.Maximized
-
-
 
     End Sub
 
@@ -651,13 +546,6 @@ Public Class Form1
         End With
 
     End Sub
-
-
-
-
-
-
-
 
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
 
@@ -964,8 +852,6 @@ Public Class Form1
 
                     TimerState = AppState.Stopped
 
-
-
                 End If
 
             Case AppState.Initial
@@ -1000,7 +886,6 @@ Public Class Form1
                     TimerState = AppState.Running
 
                     StartTime = Now
-
 
                 End If
 
@@ -1259,7 +1144,6 @@ Public Class Form1
 
                 End If
 
-
                 If TimerState = AppState.Stopped Then
 
                     TimerState = AppState.Running
@@ -1271,7 +1155,6 @@ Public Class Form1
         End Select
 
     End Sub
-
 
 End Class
 
