@@ -914,24 +914,27 @@ Public Class Form1
 
                 If StartButton.Rect.Contains(e.Location) Then
 
-                    If Not InitialEntry = String.Empty Then
+                    StartTimer()
 
-                        ' Ensure the input string is padded to at least 6 digits
-                        Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
 
-                        ' Extract hours, minutes, and seconds from the string
-                        Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
-                        Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
-                        Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
+                    'If Not InitialEntry = String.Empty Then
 
-                        ' Create and return the TimeSpan
-                        Duration = New TimeSpan(hours, minutes, seconds)
+                    '    ' Ensure the input string is padded to at least 6 digits
+                    '    Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
 
-                        TimerState = AppState.Running
+                    '    ' Extract hours, minutes, and seconds from the string
+                    '    Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
+                    '    Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
+                    '    Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
 
-                        StartTime = Now
+                    '    ' Create and return the TimeSpan
+                    '    Duration = New TimeSpan(hours, minutes, seconds)
 
-                    End If
+                    '    TimerState = AppState.Running
+
+                    '    StartTime = Now
+
+                    'End If
 
                 End If
 
@@ -955,15 +958,7 @@ Public Class Form1
 
             Case Keys.Back
 
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length > 0 Then
-
-                        InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
-
-                    End If
-
-                End If
+                DeleteLastInitialEntryCharacter()
 
                 If TimerState = AppState.Stopped Then
 
@@ -973,15 +968,7 @@ Public Class Form1
 
             Case Keys.Delete
 
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length > 0 Then
-
-                        InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
-
-                    End If
-
-                End If
+                DeleteLastInitialEntryCharacter()
 
                 If TimerState = AppState.Stopped Then
 
@@ -991,15 +978,7 @@ Public Class Form1
 
             Case Keys.X
 
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length > 0 Then
-
-                        InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
-
-                    End If
-
-                End If
+                DeleteLastInitialEntryCharacter()
 
                 If TimerState = AppState.Stopped Then
 
@@ -1007,9 +986,11 @@ Public Class Form1
 
                 End If
 
-
             Case Keys.Pause
 
+                TogglePause()
+
+            Case Keys.P
 
                 TogglePause()
 
@@ -1185,24 +1166,7 @@ Public Class Form1
 
                 If TimerState = AppState.Initial Then
 
-                    If Not InitialEntry = String.Empty Then
-
-                        ' Ensure the input string is padded to at least 6 digits
-                        InitialEntry = InitialEntry.PadLeft(6, "0"c)
-
-                        ' Extract hours, minutes, and seconds from the string
-                        Dim hours As Integer = Integer.Parse(InitialEntry.Substring(0, 2))
-                        Dim minutes As Integer = Integer.Parse(InitialEntry.Substring(2, 2))
-                        Dim seconds As Integer = Integer.Parse(InitialEntry.Substring(4, 2))
-
-                        ' Create and return the TimeSpan
-                        Duration = New TimeSpan(hours, minutes, seconds)
-
-                        TimerState = AppState.Running
-
-                        StartTime = Now
-
-                    End If
+                    StartTimer()
 
                 End If
 
@@ -1215,6 +1179,48 @@ Public Class Form1
                 End If
 
         End Select
+
+    End Sub
+
+    Private Sub StartTimer()
+
+        ' Did the user enter a duration?
+        If Not InitialEntry = String.Empty Then
+            ' Yes, the user did enter a duration.
+
+            ' Ensure the input string is padded to at least 6 digits
+            Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
+
+            ' Extract hours, minutes, and seconds from the string
+            Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
+            Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
+            Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
+
+            ' Create and return the TimeSpan
+            Duration = New TimeSpan(hours, minutes, seconds)
+
+            TimerState = AppState.Running
+
+            StartTime = Now
+
+        End If
+
+    End Sub
+
+    Private Sub DeleteLastInitialEntryCharacter()
+
+        If TimerState = AppState.Initial Then
+
+            ' Are there character to delete?
+            If InitialEntry.Length > 0 Then
+                ' Yes, there are character to delete.
+
+                ' Delete the last character in the initial entry string.
+                InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
+
+            End If
+
+        End If
 
     End Sub
 
