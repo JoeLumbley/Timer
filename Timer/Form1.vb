@@ -91,6 +91,9 @@ Public Class Form1
 
     Private RestartButton As ButtonStruct
 
+    Private PauseButton As ButtonStruct
+
+
     Private ElapsedTime As TimeSpan
 
 
@@ -118,6 +121,8 @@ Public Class Form1
         StartButton.Text = "▶"
 
         RestartButton.Text = "▶"
+
+        PauseButton.Text = "⏸"
 
         Timer1.Interval = 15
 
@@ -246,6 +251,45 @@ Public Class Form1
             StartButton.TextLocation = New Point(StartButton.Rect.X + StartButton.Rect.Width / 2, StartButton.Rect.Y + StartButton.Rect.Height / 2)
 
             StartButton.Radius = ClientSize.Height / 30
+
+
+
+
+            ' Paused
+
+
+
+            PauseButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
+                                             ClientSize.Height / 2 + ButtonSize,
+                                             ButtonSize,
+                                             ButtonSize)
+
+            If ClientSize.Height / 25 > 10 Then
+
+                FontSize = ClientSize.Height / 25
+
+            Else
+
+                FontSize = 10
+
+            End If
+
+            'FontSize = ClientSize.Height / 30
+            PauseButton.Font = New Font("Segoe UI Symbol", FontSize, FontStyle.Regular)
+
+            PauseButton.TextLocation = New Point(PauseButton.Rect.X + PauseButton.Rect.Width / 2, PauseButton.Rect.Y + PauseButton.Rect.Height / 2)
+
+            PauseButton.Radius = ClientSize.Height / 30
+
+
+
+
+
+
+
+
+
+
 
             ' Dispose of the existing buffer
             If Buffer IsNot Nothing Then
@@ -382,6 +426,10 @@ Public Class Form1
 
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
+                            FillRoundedRectangle(Brushes.White, PauseButton.Rect, PauseButton.Radius, Buffer.Graphics)
+
+                            .DrawString(PauseButton.Text, PauseButton.Font, Brushes.Black, PauseButton.TextLocation, AlineCenterMiddle)
+
                         Case AppState.Stopped
 
                             .Clear(Color.Black)
@@ -409,6 +457,15 @@ Public Class Form1
                                 .DrawString(InitialDisplay.Text, InitialDisplay.Font, Brushes.LightGray, InitialDisplay.Location, AlineCenterMiddle)
 
                             End If
+
+                        Case AppState.Paused
+
+                            .Clear(Color.Black)
+
+                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
+
+
+
 
                     End Select
 
@@ -945,6 +1002,14 @@ Public Class Form1
                     TimerState = AppState.Running
 
                     StartTime = Now
+
+                End If
+
+            Case AppState.Running
+
+                If PauseButton.Rect.Contains(e.Location) Then
+
+                    TogglePause()
 
                 End If
 
