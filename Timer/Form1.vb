@@ -138,15 +138,28 @@ Public Class Form1
 
             Dim FontSize As Single
 
-            If ClientSize.Height / 10 > 30 Then
+            If ClientSize.Height / 10 > 24 Then
 
                 FontSize = ClientSize.Height / 10
 
             Else
 
-                FontSize = 30
+                FontSize = 24
 
             End If
+
+            Dim Radius As Integer
+
+            If ClientSize.Height / 30 > 14 Then
+
+                Radius = ClientSize.Height / 30
+
+            Else
+
+                Radius = 14
+
+            End If
+
 
             ' Set the font size for the main display based on the width of the client rectangle
             MainDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
@@ -167,9 +180,9 @@ Public Class Form1
 
             Dim ButtonSize As Integer
 
-            If ClientSize.Height / 8 > 32 Then
+            If ClientSize.Height / 14 > 32 Then
 
-                ButtonSize = ClientSize.Height / 8
+                ButtonSize = ClientSize.Height / 14
 
             Else
 
@@ -191,9 +204,9 @@ Public Class Form1
                                             ButtonSize,
                                             ButtonSize)
 
-            If ClientSize.Height / 25 > 10 Then
+            If ClientSize.Height / 40 > 10 Then
 
-                FontSize = ClientSize.Height / 25
+                FontSize = ClientSize.Height / 40
 
             Else
 
@@ -213,9 +226,9 @@ Public Class Form1
                                             ButtonSize,
                                             ButtonSize)
 
-            If ClientSize.Height / 25 > 10 Then
+            If ClientSize.Height / 40 > 10 Then
 
-                FontSize = ClientSize.Height / 25
+                FontSize = ClientSize.Height / 40
 
             Else
 
@@ -235,13 +248,13 @@ Public Class Form1
                                              ButtonSize,
                                              ButtonSize)
 
-            If ClientSize.Height / 30 > 8 Then
+            If ClientSize.Height / 40 > 10 Then
 
-                FontSize = ClientSize.Height / 30
+                FontSize = ClientSize.Height / 40
 
             Else
 
-                FontSize = 8
+                FontSize = 10
 
             End If
 
@@ -250,7 +263,7 @@ Public Class Form1
 
             StartButton.TextLocation = New Point(StartButton.Rect.X + StartButton.Rect.Width / 2, StartButton.Rect.Y + StartButton.Rect.Height / 2)
 
-            StartButton.Radius = ClientSize.Height / 30
+            StartButton.Radius = Radius
 
 
 
@@ -264,9 +277,9 @@ Public Class Form1
                                              ButtonSize,
                                              ButtonSize)
 
-            If ClientSize.Height / 25 > 10 Then
+            If ClientSize.Height / 40 > 10 Then
 
-                FontSize = ClientSize.Height / 25
+                FontSize = ClientSize.Height / 40
 
             Else
 
@@ -598,20 +611,23 @@ Public Class Form1
 
             Case AppState.Paused
 
-                If Duration.Hours > 0 Then
+                'ElapsedTime = DateTime.Now - StartTime
 
-                    MainDisplay.Text = Duration.ToString("h\:mm\:ss")
+                Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+
+                If RemainingTime.Hours > 0 Then
+
+                    MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
 
                 Else
 
-                    If Duration.Minutes > 0 Then
+                    If RemainingTime.Minutes > 0 Then
 
-                        MainDisplay.Text = Duration.ToString("m\:ss")
+                        MainDisplay.Text = RemainingTime.ToString("m\:ss")
 
                     Else
 
-                        MainDisplay.Text = Duration.Seconds.ToString
-
+                        MainDisplay.Text = RemainingTime.Seconds.ToString
 
                     End If
 
