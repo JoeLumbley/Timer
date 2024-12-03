@@ -93,6 +93,8 @@ Public Class Form1
 
     Private PauseButton As ButtonStruct
 
+    Private ResumeButton As ButtonStruct
+
 
     Private ElapsedTime As TimeSpan
 
@@ -124,6 +126,9 @@ Public Class Form1
 
         PauseButton.Text = "⏸"
 
+        ResumeButton.Text = "▶"
+
+
         Timer1.Interval = 15
 
         Timer1.Enabled = True
@@ -138,21 +143,21 @@ Public Class Form1
 
             Dim FontSize As Single
 
-            If ClientSize.Height / 10 > 24 Then
+            If ClientSize.Height / 10 > 45 Then
 
                 FontSize = ClientSize.Height / 10
 
             Else
 
-                FontSize = 24
+                FontSize = 45
 
             End If
 
             Dim Radius As Integer
 
-            If ClientSize.Height / 30 > 14 Then
+            If ClientSize.Height / 40 > 14 Then
 
-                Radius = ClientSize.Height / 30
+                Radius = ClientSize.Height / 40
 
             Else
 
@@ -200,7 +205,7 @@ Public Class Form1
             BottomDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
 
             RestartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                            ClientSize.Height / 2 + ButtonSize,
+                                            ClientSize.Height / 2 + ButtonSize * 1.5,
                                             ButtonSize,
                                             ButtonSize)
 
@@ -222,7 +227,7 @@ Public Class Form1
             RestartButton.Radius = ClientSize.Height / 30
 
             StopButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                            ClientSize.Height / 2 + ButtonSize,
+                                            ClientSize.Height / 2 + ButtonSize * 1.5,
                                             ButtonSize,
                                             ButtonSize)
 
@@ -244,7 +249,7 @@ Public Class Form1
             StopButton.Radius = ClientSize.Height / 30
 
             StartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                             ClientSize.Height / 2 - ButtonSize / 2,
+                                             ClientSize.Height / 2,
                                              ButtonSize,
                                              ButtonSize)
 
@@ -273,7 +278,7 @@ Public Class Form1
 
 
             PauseButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                             ClientSize.Height / 2 + ButtonSize,
+                                             ClientSize.Height / 2 + ButtonSize * 1.5,
                                              ButtonSize,
                                              ButtonSize)
 
@@ -293,6 +298,35 @@ Public Class Form1
             PauseButton.TextLocation = New Point(PauseButton.Rect.X + PauseButton.Rect.Width / 2, PauseButton.Rect.Y + PauseButton.Rect.Height / 2)
 
             PauseButton.Radius = ClientSize.Height / 30
+
+
+
+
+
+
+
+            ResumeButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
+                                             ClientSize.Height / 2 + ButtonSize * 1.5,
+                                             ButtonSize,
+                                             ButtonSize)
+
+            If ClientSize.Height / 40 > 10 Then
+
+                FontSize = ClientSize.Height / 40
+
+            Else
+
+                FontSize = 10
+
+            End If
+
+            'FontSize = ClientSize.Height / 30
+            ResumeButton.Font = New Font("Segoe UI Symbol", FontSize, FontStyle.Regular)
+
+            ResumeButton.TextLocation = New Point(ResumeButton.Rect.X + ResumeButton.Rect.Width / 2, ResumeButton.Rect.Y + ResumeButton.Rect.Height / 2)
+
+            ResumeButton.Radius = ClientSize.Height / 30
+
 
 
 
@@ -478,6 +512,9 @@ Public Class Form1
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
 
+                            FillRoundedRectangle(Brushes.White, ResumeButton.Rect, ResumeButton.Radius, Buffer.Graphics)
+
+                            .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
 
 
                     End Select
@@ -1028,6 +1065,13 @@ Public Class Form1
                     TogglePause()
 
                 End If
+
+
+            Case AppState.Paused
+
+                TogglePause()
+
+
 
         End Select
 
