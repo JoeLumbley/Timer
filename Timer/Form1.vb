@@ -1,9 +1,6 @@
 ﻿' Timer🕒
 
-' This application is designed to display the current time, date, and time zone
-' information in a user-friendly format. This app allows users to switch
-' between 12-hour and 24-hour time formats and customize the information
-' displayed in the window.
+
 
 ' MIT License
 ' Copyright(c) 2024 Joseph W. Lumbley
@@ -326,17 +323,6 @@ Public Class Form1
             ResumeButton.TextLocation = New Point(ResumeButton.Rect.X + ResumeButton.Rect.Width / 2, ResumeButton.Rect.Y + ResumeButton.Rect.Height / 2)
 
             ResumeButton.Radius = ClientSize.Height / 30
-
-
-
-
-
-
-
-
-
-
-
 
             ' Dispose of the existing buffer
             If Buffer IsNot Nothing Then
