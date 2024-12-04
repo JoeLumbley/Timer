@@ -1,14 +1,12 @@
-# Timer
-
-This application is designed to provide an intuitive and user-friendly countdown timer experience. Built with Visual Basic .NET, it offers a range of features to enhance your timing needs.
-
-
-![001](https://github.com/user-attachments/assets/eca26745-0404-4240-a4fe-042adb1956a8)
-
----
-
+# Timer⏳
 
 This application is designed to provide an intuitive and user-friendly countdown timer experience.
+
+
+![001](https://github.com/user-attachments/assets/4f46070b-4301-4fe8-9710-46f7d347ab43)
+
+
+
 
 ## Features
 
