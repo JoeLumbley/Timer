@@ -1,4 +1,4 @@
-# Timer
+# Timer🕒
 
 This application is designed to provide an intuitive and user-friendly countdown timer experience. Built with Visual Basic .NET, it offers a range of features to enhance your timing needs.
 
