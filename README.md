@@ -5,10 +5,8 @@ This application is designed to provide an intuitive and user-friendly countdown
 
 ![001](https://github.com/user-attachments/assets/eca26745-0404-4240-a4fe-042adb1956a8)
 
----
 
 
-This application is designed to provide an intuitive and user-friendly countdown timer experience.
 
 ## Features
 
