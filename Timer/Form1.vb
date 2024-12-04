@@ -1,4 +1,4 @@
-﻿' Timer🕒
+﻿' Timer⏳
 
 
 
@@ -671,7 +671,7 @@ Public Class Form1
 
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
 
-        Text = "Timer🕒 - Code with Joe"
+        Text = "Timer⏳ - Code with Joe"
 
         Me.WindowState = FormWindowState.Maximized
 
@@ -1069,15 +1069,18 @@ Public Class Form1
 
             Case Keys.Back
 
+                ReturnToInitialEntryScreen()
+
                 DeleteLastInitialEntryCharacter()
 
-                If TimerState = AppState.Stopped Then
+                'If TimerState = AppState.Stopped Then
 
-                    TimerState = AppState.Initial
+                '    TimerState = AppState.Initial
 
-                End If
+                'End If
 
             Case Keys.Delete
+                ReturnToInitialEntryScreen()
 
                 DeleteLastInitialEntryCharacter()
 
@@ -1088,6 +1091,19 @@ Public Class Form1
                 End If
 
             Case Keys.X
+                ReturnToInitialEntryScreen()
+
+                DeleteLastInitialEntryCharacter()
+
+                If TimerState = AppState.Stopped Then
+
+                    TimerState = AppState.Initial
+
+                End If
+
+            Case Keys.Escape
+
+                ReturnToInitialEntryScreen()
 
                 DeleteLastInitialEntryCharacter()
 
@@ -1107,11 +1123,17 @@ Public Class Form1
 
             Case Keys.D0
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    If Not InitialEntry = String.Empty Then
+                If TimerState = AppState.Initial Then
 
-                        InitialEntry = InitialEntry & "0"
+                    If InitialEntry.Length < 6 Then
+
+                        If Not InitialEntry = String.Empty Then
+
+                            InitialEntry = InitialEntry & "0"
+
+                        End If
 
                     End If
 
@@ -1119,83 +1141,143 @@ Public Class Form1
 
             Case Keys.D1
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "1"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "1"
+
+                    End If
 
                 End If
 
             Case Keys.D2
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "2"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "2"
+
+                    End If
 
                 End If
 
             Case Keys.D3
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "3"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "3"
+
+                    End If
 
                 End If
 
             Case Keys.D4
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "4"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "4"
+
+                    End If
 
                 End If
 
             Case Keys.D5
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "5"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "5"
+
+                    End If
 
                 End If
 
             Case Keys.D6
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "6"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "6"
+
+                    End If
 
                 End If
 
             Case Keys.D7
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "7"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "7"
+
+                    End If
 
                 End If
 
             Case Keys.D8
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "8"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "8"
+
+                    End If
 
                 End If
 
             Case Keys.D9
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "9"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "9"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad0
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    If Not InitialEntry = String.Empty Then
+                If TimerState = AppState.Initial Then
 
-                        InitialEntry = InitialEntry & "0"
+                    If InitialEntry.Length < 6 Then
+
+                        If Not InitialEntry = String.Empty Then
+
+                            InitialEntry = InitialEntry & "0"
+
+                        End If
 
                     End If
 
@@ -1203,77 +1285,133 @@ Public Class Form1
 
             Case Keys.NumPad1
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "1"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "1"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad2
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "2"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "2"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad3
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "3"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "3"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad4
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "4"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "4"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad5
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "5"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "5"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad6
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "6"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "6"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad7
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "7"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "7"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad8
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "8"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "8"
+
+                    End If
 
                 End If
 
             Case Keys.NumPad9
 
-                If InitialEntry.Length < 6 Then
+                ReturnToInitialEntryScreen()
 
-                    InitialEntry = InitialEntry & "9"
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "9"
+
+                    End If
 
                 End If
 
             Case Keys.Enter
+
+                ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -1291,6 +1429,15 @@ Public Class Form1
 
         End Select
 
+    End Sub
+
+    Private Sub ReturnToInitialEntryScreen()
+        ' ReturnToInitialEntryScreen
+        If TimerState = AppState.Stopped Then
+
+            TimerState = AppState.Initial
+
+        End If
     End Sub
 
     Private Sub StartTimer()
