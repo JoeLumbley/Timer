@@ -32,6 +32,7 @@ Imports System.Runtime.InteropServices
 Imports System.Text
 
 Public Class Form1
+
     Public Enum AppState
         Initial
         Running
@@ -65,6 +66,7 @@ Public Class Form1
         Public Text As String
         Public Font As Font
     End Structure
+
     Private Structure ButtonStruct
         Public Rect As Rectangle
         Public Radius As Integer
