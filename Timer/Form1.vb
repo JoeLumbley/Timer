@@ -1190,26 +1190,28 @@ Public Class Form1
                 'End If
 
             Case Keys.Delete
+
                 ReturnToInitialEntryScreen()
 
                 DeleteLastInitialEntryCharacter()
 
-                If TimerState = AppState.Stopped Then
+                'If TimerState = AppState.Stopped Then
 
-                    TimerState = AppState.Initial
+                '    TimerState = AppState.Initial
 
-                End If
+                'End If
 
             Case Keys.X
+
                 ReturnToInitialEntryScreen()
 
                 DeleteLastInitialEntryCharacter()
 
-                If TimerState = AppState.Stopped Then
+                'If TimerState = AppState.Stopped Then
 
-                    TimerState = AppState.Initial
+                '    TimerState = AppState.Initial
 
-                End If
+                'End If
 
             Case Keys.Escape
 
@@ -1217,11 +1219,11 @@ Public Class Form1
 
                 DeleteLastInitialEntryCharacter()
 
-                If TimerState = AppState.Stopped Then
+                'If TimerState = AppState.Stopped Then
 
-                    TimerState = AppState.Initial
+                '    TimerState = AppState.Initial
 
-                End If
+                'End If
 
             Case Keys.Pause
 
@@ -1520,8 +1522,6 @@ Public Class Form1
                 End If
 
             Case Keys.Enter
-
-                ReturnToInitialEntryScreen()
 
                 Select Case TimerState
 
