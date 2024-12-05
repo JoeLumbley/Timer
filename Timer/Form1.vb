@@ -203,89 +203,9 @@ Public Class Form1
 
             ResizeStartButton()
 
+            ResizePauseButton()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            ' ResizePauseButton
-
-
-
-            PauseButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                             ClientSize.Height / 2 + ButtonSize * 1.5,
-                                             ButtonSize,
-                                             ButtonSize)
-
-            If ClientSize.Height / 40 > 10 Then
-
-                FontSize = ClientSize.Height / 40
-
-            Else
-
-                FontSize = 10
-
-            End If
-
-            'FontSize = ClientSize.Height / 30
-            PauseButton.Font = New Font("Segoe UI Symbol", FontSize, FontStyle.Regular)
-
-            PauseButton.TextLocation = New Point(PauseButton.Rect.X + PauseButton.Rect.Width / 2, PauseButton.Rect.Y + PauseButton.Rect.Height / 2)
-
-            PauseButton.Radius = ClientSize.Height / 30
-
-
-
-
-
-
-
-
-
-
-
-            ' ResizeResumeButton
-
-
-
-
-
-
-
-
-
-            ResumeButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                             ClientSize.Height / 2 + ButtonSize * 1.5,
-                                             ButtonSize,
-                                             ButtonSize)
-
-            If ClientSize.Height / 40 > 10 Then
-
-                FontSize = ClientSize.Height / 40
-
-            Else
-
-                FontSize = 10
-
-            End If
-
-            'FontSize = ClientSize.Height / 30
-            ResumeButton.Font = New Font("Segoe UI Symbol", FontSize, FontStyle.Regular)
-
-            ResumeButton.TextLocation = New Point(ResumeButton.Rect.X + ResumeButton.Rect.Width / 2, ResumeButton.Rect.Y + ResumeButton.Rect.Height / 2)
-
-            ResumeButton.Radius = ClientSize.Height / 30
-
+            ResizeResumeButton()
 
 
 
@@ -326,6 +246,88 @@ Public Class Form1
             End If
 
         End If
+
+    End Sub
+
+    Private Sub ResizeResumeButton()
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        ResumeButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
+                                         ClientSize.Height / 2 + ButtonSize * 1.5,
+                                         ButtonSize,
+                                         ButtonSize)
+        Dim FontSize As Single
+
+        If ClientSize.Height / 40 > 10 Then
+
+            FontSize = ClientSize.Height / 40
+
+        Else
+
+            FontSize = 10
+
+        End If
+
+        ResumeButton.Font = New Font("Segoe UI Symbol",
+                                     FontSize,
+                                     FontStyle.Regular)
+
+        ResumeButton.TextLocation = New Point(ResumeButton.Rect.X + ResumeButton.Rect.Width / 2,
+                                              ResumeButton.Rect.Y + ResumeButton.Rect.Height / 2)
+
+        ResumeButton.Radius = ClientSize.Height / 30
+
+    End Sub
+
+    Private Sub ResizePauseButton()
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        PauseButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
+                                         ClientSize.Height / 2 + ButtonSize * 1.5,
+                                         ButtonSize,
+                                         ButtonSize)
+        Dim FontSize As Single
+
+        If ClientSize.Height / 40 > 10 Then
+
+            FontSize = ClientSize.Height / 40
+
+        Else
+
+            FontSize = 10
+
+        End If
+
+        PauseButton.Font = New Font("Segoe UI Symbol",
+                                    FontSize,
+                                    FontStyle.Regular)
+
+        PauseButton.TextLocation = New Point(PauseButton.Rect.X + PauseButton.Rect.Width / 2,
+                                             PauseButton.Rect.Y + PauseButton.Rect.Height / 2)
+
+        PauseButton.Radius = ClientSize.Height / 30
 
     End Sub
 
