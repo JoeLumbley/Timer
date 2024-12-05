@@ -1523,25 +1523,58 @@ Public Class Form1
 
                 ReturnToInitialEntryScreen()
 
-                If TimerState = AppState.Initial Then
+                Select Case TimerState
 
-                    StartTimer()
+                    Case AppState.Initial
 
-                End If
+                        StartTimer()
 
-                If TimerState = AppState.Stopped Then
+                    Case AppState.Stopped
 
-                    TimerState = AppState.Running
+                        TimerState = AppState.Running
 
-                    StartTime = Now
+                        StartTime = Now
 
-                End If
+                    Case AppState.Completed
 
-                If TimerState = AppState.Completed Then
+                        TimerState = AppState.Stopped
 
-                    TimerState = AppState.Stopped
+                    Case AppState.Paused
 
-                End If
+                        TogglePause()
+
+                    Case AppState.Running
+
+                        TogglePause()
+
+                End Select
+
+                'If TimerState = AppState.Initial Then
+
+                '    StartTimer()
+
+                'End If
+
+                'If TimerState = AppState.Stopped Then
+
+                '    TimerState = AppState.Running
+
+                '    StartTime = Now
+
+                'End If
+
+                'If TimerState = AppState.Completed Then
+
+                '    TimerState = AppState.Stopped
+
+                'End If
+
+                'If TimerState = AppState.Paused Or TimerState = AppState.Running Then
+
+                '    TogglePause()
+
+                'End If
+
 
         End Select
 
