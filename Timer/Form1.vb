@@ -1549,33 +1549,6 @@ Public Class Form1
 
                 End Select
 
-                'If TimerState = AppState.Initial Then
-
-                '    StartTimer()
-
-                'End If
-
-                'If TimerState = AppState.Stopped Then
-
-                '    TimerState = AppState.Running
-
-                '    StartTime = Now
-
-                'End If
-
-                'If TimerState = AppState.Completed Then
-
-                '    TimerState = AppState.Stopped
-
-                'End If
-
-                'If TimerState = AppState.Paused Or TimerState = AppState.Running Then
-
-                '    TogglePause()
-
-                'End If
-
-
         End Select
 
     End Sub
