@@ -139,52 +139,41 @@ Public Class Form1
 
         If Not WindowState = FormWindowState.Minimized Then
 
+            'Dim FontSize As Single
 
+            'If ClientSize.Height / 10 > 45 Then
 
+            '    FontSize = ClientSize.Height / 10
 
+            'Else
 
+            '    FontSize = 45
 
+            'End If
 
+            'Dim Radius As Integer
 
-            Dim FontSize As Single
+            'If ClientSize.Height / 40 > 14 Then
 
-            If ClientSize.Height / 10 > 45 Then
+            '    Radius = ClientSize.Height / 40
 
-                FontSize = ClientSize.Height / 10
+            'Else
 
-            Else
+            '    Radius = 14
 
-                FontSize = 45
+            'End If
 
-            End If
+            'Dim ButtonSize As Integer = Nothing
 
-            Dim Radius As Integer
+            'If ClientSize.Height / 14 > 32 Then
 
-            If ClientSize.Height / 40 > 14 Then
+            '    ButtonSize = ClientSize.Height / 14
 
-                Radius = ClientSize.Height / 40
+            'Else
 
-            Else
+            '    ButtonSize = 32
 
-                Radius = 14
-
-            End If
-
-            Dim ButtonSize As Integer = Nothing
-
-            If ClientSize.Height / 14 > 32 Then
-
-                ButtonSize = ClientSize.Height / 14
-
-            Else
-
-                ButtonSize = 32
-
-            End If
-
-
-
-
+            'End If
 
             ResizeMainDisplay()
 
@@ -194,45 +183,11 @@ Public Class Form1
 
             ResizeStopButton()
 
-
-
-
-
-
-
-
             ResizeStartButton()
 
             ResizePauseButton()
 
             ResizeResumeButton()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             ' Dispose of the existing buffer
             If Buffer IsNot Nothing Then
@@ -473,9 +428,9 @@ Public Class Form1
 
         Dim FontSize As Single
 
-        If ClientSize.Height / 25 > 10 Then
+        If ClientSize.Height / 35 > 10 Then
 
-            FontSize = ClientSize.Height / 25
+            FontSize = ClientSize.Height / 35
 
         Else
 
