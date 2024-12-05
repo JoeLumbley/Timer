@@ -139,42 +139,6 @@ Public Class Form1
 
         If Not WindowState = FormWindowState.Minimized Then
 
-            'Dim FontSize As Single
-
-            'If ClientSize.Height / 10 > 45 Then
-
-            '    FontSize = ClientSize.Height / 10
-
-            'Else
-
-            '    FontSize = 45
-
-            'End If
-
-            'Dim Radius As Integer
-
-            'If ClientSize.Height / 40 > 14 Then
-
-            '    Radius = ClientSize.Height / 40
-
-            'Else
-
-            '    Radius = 14
-
-            'End If
-
-            'Dim ButtonSize As Integer = Nothing
-
-            'If ClientSize.Height / 14 > 32 Then
-
-            '    ButtonSize = ClientSize.Height / 14
-
-            'Else
-
-            '    ButtonSize = 32
-
-            'End If
-
             ResizeMainDisplay()
 
             ResizeInitialDisplay()
@@ -265,9 +229,9 @@ Public Class Form1
                                          ButtonSize)
         Dim FontSize As Single
 
-        If ClientSize.Height / 40 > 10 Then
+        If ClientSize.Height / 45 > 10 Then
 
-            FontSize = ClientSize.Height / 40
+            FontSize = ClientSize.Height / 45
 
         Else
 
@@ -361,9 +325,9 @@ Public Class Form1
 
         Dim FontSize As Single
 
-        If ClientSize.Height / 40 > 10 Then
+        If ClientSize.Height / 45 > 10 Then
 
-            FontSize = ClientSize.Height / 40
+            FontSize = ClientSize.Height / 45
 
         Else
 
@@ -403,9 +367,9 @@ Public Class Form1
 
         Dim FontSize As Single
 
-        If ClientSize.Height / 40 > 10 Then
+        If ClientSize.Height / 45 > 10 Then
 
-            FontSize = ClientSize.Height / 40
+            FontSize = ClientSize.Height / 45
 
         Else
 
@@ -1573,17 +1537,24 @@ Public Class Form1
 
                 End If
 
+                If TimerState = AppState.Completed Then
+
+                    TimerState = AppState.Stopped
+
+                End If
+
         End Select
 
     End Sub
 
     Private Sub ReturnToInitialEntryScreen()
-        ' ReturnToInitialEntryScreen
+
         If TimerState = AppState.Stopped Then
 
             TimerState = AppState.Initial
 
         End If
+
     End Sub
 
     Private Sub StartTimer()
