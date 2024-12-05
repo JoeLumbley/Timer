@@ -99,7 +99,6 @@ Public Class Form1
 
     Private InitialDisplay As DisplayObject
 
-
     Private StopButton As ButtonStruct
 
     Private StartButton As ButtonStruct
@@ -110,12 +109,7 @@ Public Class Form1
 
     Private ResumeButton As ButtonStruct
 
-
     Private ElapsedTime As TimeSpan
-
-
-
-
 
     Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
 
@@ -524,10 +518,6 @@ Public Class Form1
 
     End Sub
 
-
-
-
-
     Private Sub TogglePause()
 
         If TimerState = AppState.Running Then
@@ -547,11 +537,6 @@ Public Class Form1
         End If
 
     End Sub
-
-
-
-
-
 
     Private Sub UpdateDisplays()
 
@@ -623,11 +608,9 @@ Public Class Form1
 
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
-
                             FillRoundedRectangle(Brushes.White, ResumeButton.Rect, ResumeButton.Radius, Buffer.Graphics)
 
                             .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
-
 
                     End Select
 
@@ -732,7 +715,6 @@ Public Class Form1
 
                         MainDisplay.Text = Duration.Seconds.ToString
 
-
                     End If
 
                 End If
@@ -782,7 +764,6 @@ Public Class Form1
 
                 End If
 
-
         End Select
 
     End Sub
@@ -826,8 +807,6 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
-
-        'GameLoopCancellationToken.Cancel(True)
 
         CloseSounds()
 
@@ -1138,26 +1117,6 @@ Public Class Form1
 
                     StartTimer()
 
-
-                    'If Not InitialEntry = String.Empty Then
-
-                    '    ' Ensure the input string is padded to at least 6 digits
-                    '    Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
-
-                    '    ' Extract hours, minutes, and seconds from the string
-                    '    Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
-                    '    Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
-                    '    Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
-
-                    '    ' Create and return the TimeSpan
-                    '    Duration = New TimeSpan(hours, minutes, seconds)
-
-                    '    TimerState = AppState.Running
-
-                    '    StartTime = Now
-
-                    'End If
-
                 End If
 
             Case AppState.Stopped
@@ -1178,12 +1137,9 @@ Public Class Form1
 
                 End If
 
-
             Case AppState.Paused
 
                 TogglePause()
-
-
 
         End Select
 
@@ -1199,23 +1155,11 @@ Public Class Form1
 
                 DeleteLastInitialEntryCharacter()
 
-                'If TimerState = AppState.Stopped Then
-
-                '    TimerState = AppState.Initial
-
-                'End If
-
             Case Keys.Delete
 
                 ReturnToInitialEntryScreen()
 
                 DeleteLastInitialEntryCharacter()
-
-                'If TimerState = AppState.Stopped Then
-
-                '    TimerState = AppState.Initial
-
-                'End If
 
             Case Keys.X
 
@@ -1223,23 +1167,11 @@ Public Class Form1
 
                 DeleteLastInitialEntryCharacter()
 
-                'If TimerState = AppState.Stopped Then
-
-                '    TimerState = AppState.Initial
-
-                'End If
-
             Case Keys.Escape
 
                 ReturnToInitialEntryScreen()
 
                 DeleteLastInitialEntryCharacter()
-
-                'If TimerState = AppState.Stopped Then
-
-                '    TimerState = AppState.Initial
-
-                'End If
 
             Case Keys.Pause
 
