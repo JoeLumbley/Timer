@@ -199,39 +199,9 @@ Public Class Form1
 
 
 
-            ' ResizeStartButton
 
 
-
-
-
-
-
-
-
-
-            StartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                             ClientSize.Height / 2,
-                                             ButtonSize,
-                                             ButtonSize)
-
-            If ClientSize.Height / 40 > 10 Then
-
-                FontSize = ClientSize.Height / 40
-
-            Else
-
-                FontSize = 10
-
-            End If
-
-            'FontSize = ClientSize.Height / 30
-            StartButton.Font = New Font("Segoe UI Symbol", FontSize, FontStyle.Regular)
-
-            StartButton.TextLocation = New Point(StartButton.Rect.X + StartButton.Rect.Width / 2, StartButton.Rect.Y + StartButton.Rect.Height / 2)
-
-            StartButton.Radius = Radius
-
+            ResizeStartButton()
 
 
 
@@ -356,6 +326,60 @@ Public Class Form1
             End If
 
         End If
+
+    End Sub
+
+    Private Sub ResizeStartButton()
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        StartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
+                                         ClientSize.Height / 2,
+                                         ButtonSize,
+                                         ButtonSize)
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 40 > 10 Then
+
+            FontSize = ClientSize.Height / 40
+
+        Else
+
+            FontSize = 10
+
+        End If
+
+        StartButton.Font = New Font("Segoe UI Symbol",
+                                    FontSize,
+                                    FontStyle.Regular)
+
+        StartButton.TextLocation = New Point(StartButton.Rect.X + StartButton.Rect.Width / 2,
+                                             StartButton.Rect.Y + StartButton.Rect.Height / 2)
+
+        Dim Radius As Integer
+
+        If ClientSize.Height / 40 > 14 Then
+
+            Radius = ClientSize.Height / 40
+
+        Else
+
+            Radius = 14
+
+        End If
+
+        StartButton.Radius = Radius
 
     End Sub
 
