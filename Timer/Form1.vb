@@ -127,7 +127,6 @@ Public Class Form1
 
         ResumeButton.Text = "▶"
 
-
         Timer1.Interval = 15
 
         Timer1.Enabled = True
@@ -139,6 +138,13 @@ Public Class Form1
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
         If Not WindowState = FormWindowState.Minimized Then
+
+
+
+
+
+
+
 
             Dim FontSize As Single
 
@@ -164,25 +170,7 @@ Public Class Form1
 
             End If
 
-
-            ' Set the font size for the main display based on the width of the client rectangle
-            MainDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
-
-            ' Center the main display in the client rectangle.
-            MainDisplay.Location.X = ClientSize.Width / 2
-            MainDisplay.Location.Y = ClientSize.Height / 2
-
-            If ClientSize.Height / 25 > 10 Then
-
-                FontSize = ClientSize.Height / 25
-
-            Else
-
-                FontSize = 10
-
-            End If
-
-            Dim ButtonSize As Integer
+            Dim ButtonSize As Integer = Nothing
 
             If ClientSize.Height / 14 > 32 Then
 
@@ -194,58 +182,33 @@ Public Class Form1
 
             End If
 
-            InitialDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
-            InitialDisplay.Location.X = ClientSize.Width / 2
-            InitialDisplay.Location.Y = ClientSize.Height / 2 - ButtonSize
 
-            ' Set the font size for the top and bottom display based on the width of the client rectangle
-            FontSize = ClientSize.Width / 41
-            TopDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
-            BottomDisplay.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
 
-            RestartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                            ClientSize.Height / 2 + ButtonSize * 1.5,
-                                            ButtonSize,
-                                            ButtonSize)
 
-            If ClientSize.Height / 40 > 10 Then
 
-                FontSize = ClientSize.Height / 40
+            ResizeMainDisplay()
 
-            Else
+            ResizeInitialDisplay()
 
-                FontSize = 10
+            ResizeRestartButton()
 
-            End If
+            ResizeStopButton()
 
-            'FontSize = ClientSize.Width / 75
-            RestartButton.Font = New Font("Segoe UI Symbol", FontSize, FontStyle.Regular)
 
-            RestartButton.TextLocation = New Point(RestartButton.Rect.X + RestartButton.Rect.Width / 2, RestartButton.Rect.Y + RestartButton.Rect.Height / 2)
 
-            RestartButton.Radius = ClientSize.Height / 30
 
-            StopButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
-                                            ClientSize.Height / 2 + ButtonSize * 1.5,
-                                            ButtonSize,
-                                            ButtonSize)
 
-            If ClientSize.Height / 40 > 10 Then
 
-                FontSize = ClientSize.Height / 40
+            ' ResizeStartButton
 
-            Else
 
-                FontSize = 10
 
-            End If
 
-            'FontSize = ClientSize.Width / 85
-            StopButton.Font = New Font("Segoe UI", FontSize, FontStyle.Regular)
 
-            StopButton.TextLocation = New Point(StopButton.Rect.X + StopButton.Rect.Width / 2, StopButton.Rect.Y + StopButton.Rect.Height / 2)
 
-            StopButton.Radius = ClientSize.Height / 30
+
+
+
 
             StartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
                                              ClientSize.Height / 2,
@@ -272,7 +235,20 @@ Public Class Form1
 
 
 
-            ' Paused
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ' ResizePauseButton
 
 
 
@@ -304,6 +280,20 @@ Public Class Form1
 
 
 
+
+
+
+
+            ' ResizeResumeButton
+
+
+
+
+
+
+
+
+
             ResumeButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
                                              ClientSize.Height / 2 + ButtonSize * 1.5,
                                              ButtonSize,
@@ -326,6 +316,34 @@ Public Class Form1
 
             ResumeButton.Radius = ClientSize.Height / 30
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             ' Dispose of the existing buffer
             If Buffer IsNot Nothing Then
 
@@ -338,6 +356,151 @@ Public Class Form1
             End If
 
         End If
+
+    End Sub
+
+    Private Sub ResizeStopButton()
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        StopButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
+                                        ClientSize.Height / 2 + ButtonSize * 1.5,
+                                        ButtonSize,
+                                        ButtonSize)
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 40 > 10 Then
+
+            FontSize = ClientSize.Height / 40
+
+        Else
+
+            FontSize = 10
+
+        End If
+
+        StopButton.Font = New Font("Segoe UI",
+                                   FontSize,
+                                   FontStyle.Regular)
+
+        StopButton.TextLocation = New Point(StopButton.Rect.X + StopButton.Rect.Width / 2,
+                                            StopButton.Rect.Y + StopButton.Rect.Height / 2)
+
+        StopButton.Radius = ClientSize.Height / 30
+
+    End Sub
+
+    Private Sub ResizeRestartButton()
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        RestartButton.Rect = New Rectangle(ClientSize.Width / 2 - ButtonSize / 2,
+                                           ClientSize.Height / 2 + ButtonSize * 1.5,
+                                           ButtonSize,
+                                           ButtonSize)
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 40 > 10 Then
+
+            FontSize = ClientSize.Height / 40
+
+        Else
+
+            FontSize = 10
+
+        End If
+
+        RestartButton.Font = New Font("Segoe UI Symbol",
+                                      FontSize,
+                                      FontStyle.Regular)
+
+        RestartButton.TextLocation = New Point(RestartButton.Rect.X + RestartButton.Rect.Width / 2,
+                                               RestartButton.Rect.Y + RestartButton.Rect.Height / 2)
+
+        RestartButton.Radius = ClientSize.Height / 30
+
+    End Sub
+
+    Private Sub ResizeInitialDisplay()
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 25 > 10 Then
+
+            FontSize = ClientSize.Height / 25
+
+        Else
+
+            FontSize = 10
+
+        End If
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        InitialDisplay.Font = New Font("Segoe UI",
+                                       FontSize,
+                                       FontStyle.Regular)
+
+        InitialDisplay.Location.X = ClientSize.Width / 2
+
+        InitialDisplay.Location.Y = ClientSize.Height / 2 - ButtonSize
+
+    End Sub
+
+    Private Sub ResizeMainDisplay()
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 10 > 45 Then
+
+            FontSize = ClientSize.Height / 10
+
+        Else
+
+            FontSize = 45
+
+        End If
+
+        ' Set the font size for the main display based on the width of the client rectangle
+        MainDisplay.Font = New Font("Segoe UI",
+                                    FontSize,
+                                    FontStyle.Regular)
+
+        ' Center the main display in the client rectangle.
+        MainDisplay.Location.X = ClientSize.Width / 2
+        MainDisplay.Location.Y = ClientSize.Height / 2
 
     End Sub
 
