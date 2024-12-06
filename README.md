@@ -24,7 +24,7 @@ Clone this repository and run the application to start using the timer. Whether 
 
 
 How to Clone a GitHub Repository
-[Video](https://youtube.com/shorts/n8bCEIdI44U?si=3LD1MtsabNRh-v7E) - YouTube
+[Watch](https://youtube.com/shorts/n8bCEIdI44U?si=3LD1MtsabNRh-v7E) - YouTube
 
 ---
 
