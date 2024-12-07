@@ -23,8 +23,8 @@ This application is designed to provide an intuitive and user-friendly countdown
 Clone this repository and run the application to start using the timer. Whether you're timing a workout, cooking, or managing tasks, this timer is here to help you stay on track!
 
 
-How to Clone a GitHub Repository
-[Watch](https://youtube.com/shorts/n8bCEIdI44U?si=3LD1MtsabNRh-v7E) - YouTube
+
+[Watch](https://youtube.com/shorts/n8bCEIdI44U?si=3LD1MtsabNRh-v7E) how to Clone a GitHub Repository - YouTube
 
 ---
 
