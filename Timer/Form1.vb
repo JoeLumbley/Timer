@@ -99,6 +99,14 @@ Public Class Form1
 
     Private InitialDisplay As DisplayObject
 
+    Private CircleOfProgress As Rectangle
+
+    Private CircleOfProgressPen As Pen
+
+    Private CircleOfProgressBackgroundPen As Pen
+
+
+
     Private StopButton As ButtonStruct
 
     Private StartButton As ButtonStruct
@@ -162,6 +170,8 @@ Public Class Form1
             ResizePauseButton()
 
             ResizeResumeButton()
+
+            ResizeCircleOfProgress()
 
             ' Dispose of the existing buffer
             If Buffer IsNot Nothing Then
@@ -457,7 +467,67 @@ Public Class Form1
         MainDisplay.Location.X = ClientSize.Width / 2
         MainDisplay.Location.Y = ClientSize.Height / 2
 
+        'CircleOfProgress.Width = ClientSize.Height / 2
+        'CircleOfProgress.Height = ClientSize.Height / 2
+        'CircleOfProgress.X = ClientSize.Width / 2 - CircleOfProgress.Width / 2
+        'CircleOfProgress.Y = ClientSize.Height / 2 - CircleOfProgress.Height / 2
+
+
     End Sub
+
+
+
+    Private Sub ResizeCircleOfProgress()
+
+        Dim PenSize As Single
+
+        If ClientSize.Height / 30 > 5 Then
+
+            PenSize = ClientSize.Height / 30
+
+        Else
+
+            PenSize = 5
+
+        End If
+
+        CircleOfProgressBackgroundPen = New Pen(Color.Gray, PenSize)
+
+        If ClientSize.Height / 40 > 5 Then
+
+            PenSize = ClientSize.Height / 40
+
+        Else
+
+            PenSize = 5
+
+        End If
+
+        CircleOfProgressPen = New Pen(Color.Purple, PenSize)
+
+        CircleOfProgressPen.EndCap = LineCap.Round
+        CircleOfProgressPen.StartCap = LineCap.Round
+
+
+
+
+        ' Center the main display in the client rectangle.
+        MainDisplay.Location.X = ClientSize.Width / 2
+        MainDisplay.Location.Y = ClientSize.Height / 2
+
+        CircleOfProgress.Width = ClientSize.Height / 2
+        CircleOfProgress.Height = ClientSize.Height / 2
+        CircleOfProgress.X = ClientSize.Width / 2 - CircleOfProgress.Width / 2
+        CircleOfProgress.Y = ClientSize.Height / 2 - CircleOfProgress.Height / 2
+
+
+    End Sub
+
+
+
+
+
+
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
@@ -573,6 +643,24 @@ Public Class Form1
                             FillRoundedRectangle(Brushes.White, PauseButton.Rect, PauseButton.Radius, Buffer.Graphics)
 
                             .DrawString(PauseButton.Text, PauseButton.Font, Brushes.Black, PauseButton.TextLocation, AlineCenterMiddle)
+
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
+
+                            Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+
+                            Dim Ratio As Single = 360 / Duration.TotalSeconds
+
+
+                            ' Define the bounding rectangle for the arc
+                            Dim rect As New Rectangle(50, 50, 100, 100)
+
+                            ' Define the start angle and sweep angle (in degrees)
+                            Dim startAngle As Single = -90.0F
+                            Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
+
+                            ' Draw the arc
+                            .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
                         Case AppState.Stopped
 
