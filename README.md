@@ -3,7 +3,7 @@
 This application is designed to provide an intuitive and user-friendly countdown timer experience.
 
 
-![001](https://github.com/user-attachments/assets/4f46070b-4301-4fe8-9710-46f7d347ab43)
+![002](https://github.com/user-attachments/assets/bf550106-13d5-4051-bf9b-1fc35b2cc009)
 
 
 
