@@ -475,8 +475,6 @@ Public Class Form1
 
     End Sub
 
-
-
     Private Sub ResizeCircleOfProgress()
 
         Dim PenSize As Single
@@ -491,7 +489,7 @@ Public Class Form1
 
         End If
 
-        CircleOfProgressBackgroundPen = New Pen(Color.Gray, PenSize)
+        CircleOfProgressBackgroundPen = New Pen(Color.DimGray, PenSize)
 
         If ClientSize.Height / 40 > 5 Then
 
@@ -503,31 +501,18 @@ Public Class Form1
 
         End If
 
-        CircleOfProgressPen = New Pen(Color.Purple, PenSize)
+        CircleOfProgressPen = New Pen(Color.LightSkyBlue, PenSize)
 
         CircleOfProgressPen.EndCap = LineCap.Round
         CircleOfProgressPen.StartCap = LineCap.Round
 
+        CircleOfProgress.Width = ClientSize.Height / 1.5
+        CircleOfProgress.Height = ClientSize.Height / 1.5
 
-
-
-        ' Center the main display in the client rectangle.
-        MainDisplay.Location.X = ClientSize.Width / 2
-        MainDisplay.Location.Y = ClientSize.Height / 2
-
-        CircleOfProgress.Width = ClientSize.Height / 2
-        CircleOfProgress.Height = ClientSize.Height / 2
         CircleOfProgress.X = ClientSize.Width / 2 - CircleOfProgress.Width / 2
         CircleOfProgress.Y = ClientSize.Height / 2 - CircleOfProgress.Height / 2
 
-
     End Sub
-
-
-
-
-
-
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
