@@ -613,15 +613,23 @@ Public Class Form1
 
                             .Clear(Color.LightSkyBlue)
 
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.MidnightBlue, MainDisplay.Location, AlineCenterMiddle)
 
                             FillRoundedRectangle(Brushes.White, StopButton.Rect, StopButton.Radius, Buffer.Graphics)
 
                             .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
 
+
+
+
+
                         Case AppState.Running
 
                             .Clear(Color.Black)
+
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
 
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
@@ -629,7 +637,6 @@ Public Class Form1
 
                             .DrawString(PauseButton.Text, PauseButton.Font, Brushes.Black, PauseButton.TextLocation, AlineCenterMiddle)
 
-                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
 
 
                             Dim RemainingTime As TimeSpan = Duration - ElapsedTime
@@ -679,11 +686,30 @@ Public Class Form1
 
                             .Clear(Color.Black)
 
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
+
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
                             FillRoundedRectangle(Brushes.White, ResumeButton.Rect, ResumeButton.Radius, Buffer.Graphics)
 
                             .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
+
+
+                            Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+
+                            Dim Ratio As Single = 360 / Duration.TotalSeconds
+
+
+                            ' Define the bounding rectangle for the arc
+                            Dim rect As New Rectangle(50, 50, 100, 100)
+
+                            ' Define the start angle and sweep angle (in degrees)
+                            Dim startAngle As Single = -90.0F
+                            Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
+
+                            ' Draw the arc
+                            .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
                     End Select
 
@@ -747,19 +773,42 @@ Public Class Form1
 
                 Dim RemainingTime As TimeSpan = Duration - ElapsedTime
 
+                ' Do we have hours?
                 If RemainingTime.Hours > 0 Then
+                    ' Yes, we have hours.
 
+                    ' Show hours.
                     MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
 
                 Else
+                    ' No, we don't have hours.
 
+                    ' Do we have minutes?
                     If RemainingTime.Minutes > 0 Then
+                        'Yes, we have minutes.
 
+                        ' Show minutes.
                         MainDisplay.Text = RemainingTime.ToString("m\:ss")
 
-                    Else
+                        'MainDisplay.Text = RemainingTime.ToString("s\:fff")
 
-                        MainDisplay.Text = RemainingTime.Seconds.ToString
+                    Else
+                        ' No, we don't have minutes.
+
+                        ' Do we have seconds?
+                        If RemainingTime.Seconds > 0 Then
+                            ' Yes, we have seconds.
+
+                            ' Show seconds.
+                            MainDisplay.Text = RemainingTime.Seconds.ToString
+
+                        Else
+                            ' No, don't have seconds.
+
+                            ' Show milliseconds.
+                            MainDisplay.Text = RemainingTime.ToString("ff").TrimStart("0")
+
+                        End If
 
                     End If
 
@@ -774,23 +823,94 @@ Public Class Form1
 
             Case AppState.Stopped
 
-                If Duration.Hours > 0 Then
+                'If Duration.Hours > 0 Then
 
-                    MainDisplay.Text = Duration.ToString("h\:mm\:ss")
+                '    MainDisplay.Text = Duration.ToString("h\:mm\:ss")
 
-                Else
+                'Else
 
-                    If Duration.Minutes > 0 Then
+                '    If Duration.Minutes > 0 Then
 
-                        MainDisplay.Text = Duration.ToString("m\:ss")
+                '        MainDisplay.Text = Duration.ToString("m\:ss")
 
-                    Else
+                '    Else
 
-                        MainDisplay.Text = Duration.Seconds.ToString
+                '        'If Duration.Seconds > 0 Then
 
-                    End If
+                '        MainDisplay.Text = Duration.ToString("s\:fff")
 
-                End If
+                '        'Else
+
+                '        'MainDisplay.Text = Duration.Seconds
+
+                '        'End If
+
+
+
+
+                '    End If
+
+
+                'End If
+
+
+
+
+                MainDisplay.Text = "0"
+
+
+
+
+                '' Do we have hours?
+                'If Duration.Hours > 0 Then
+                '    ' Yes, we have hours.
+
+                '    ' Show hours.
+                '    MainDisplay.Text = Duration.ToString("h\:mm\:ss")
+
+                'Else
+                '    ' No, we don't have hours.
+
+                '    ' Do we have minutes?
+                '    If Duration.Minutes > 0 Then
+                '        'Yes, we have minutes.
+
+                '        ' Show minutes.
+                '        MainDisplay.Text = Duration.ToString("m\:ss")
+
+                '        'MainDisplay.Text = RemainingTime.ToString("s\:fff")
+
+                '    Else
+                '        ' No, we don't have minutes.
+
+                '        ' Do we have seconds?
+                '        If Duration.Seconds > 0 Then
+                '            ' Yes, we have seconds.
+
+                '            ' Show seconds.
+                '            MainDisplay.Text = Duration.Seconds.ToString
+
+                '        Else
+                '            ' No, don't have seconds.
+
+                '            ' Show milliseconds.
+                '            MainDisplay.Text = Duration.ToString("ff")
+
+                '        End If
+
+                '    End If
+
+                'End If
+
+
+
+
+
+
+
+
+
+
 
             Case AppState.Initial
 
@@ -815,27 +935,32 @@ Public Class Form1
 
             Case AppState.Paused
 
-                'ElapsedTime = DateTime.Now - StartTime
+                ''ElapsedTime = DateTime.Now - StartTime
 
-                Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+                'Dim RemainingTime As TimeSpan = Duration - ElapsedTime
 
-                If RemainingTime.Hours > 0 Then
+                'If RemainingTime.Hours > 0 Then
 
-                    MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
+                '    MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
 
-                Else
+                'Else
 
-                    If RemainingTime.Minutes > 0 Then
+                '    If RemainingTime.Minutes > 0 Then
 
-                        MainDisplay.Text = RemainingTime.ToString("m\:ss")
+                '        MainDisplay.Text = RemainingTime.ToString("m\:ss")
 
-                    Else
+                '    Else
 
-                        MainDisplay.Text = RemainingTime.Seconds.ToString
+                '        MainDisplay.Text = RemainingTime.Seconds.ToString
 
-                    End If
+                '    End If
 
-                End If
+                'End If
+
+
+            Case AppState.Completed
+
+                MainDisplay.Text = "0"
 
         End Select
 
