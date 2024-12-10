@@ -225,6 +225,73 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
+
+        Select Case TimerState
+            Case AppState.Completed
+
+                If StopButton.Rect.Contains(e.Location) Then
+
+                    TimerState = AppState.Stopped
+
+                End If
+
+            Case AppState.Initial
+
+                If StartButton.Rect.Contains(e.Location) Then
+
+                    StartTimer()
+
+                End If
+
+            Case AppState.Stopped
+
+                If RestartButton.Rect.Contains(e.Location) Then
+
+                    TimerState = AppState.Running
+
+                    StartTime = Now
+
+                End If
+
+            Case AppState.Running
+
+                If PauseButton.Rect.Contains(e.Location) Then
+
+                    TogglePause()
+
+                End If
+
+            Case AppState.Paused
+
+                TogglePause()
+
+        End Select
+
+    End Sub
+
+
+
+
+
+
+
+
+
+
+
+    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+
+        CloseSounds()
+
+    End Sub
+
+    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
+
+        'Intentionally left blank. Do not remove.
+
+    End Sub
+
     Private Sub UpdateDisplays()
 
         UpdateMainDisplay()
@@ -630,62 +697,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
 
-        CloseSounds()
-
-    End Sub
-
-    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
-
-        'Intentionally left blank. Do not remove.
-
-    End Sub
-
-    Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
-
-        Select Case TimerState
-            Case AppState.Completed
-
-                If StopButton.Rect.Contains(e.Location) Then
-
-                    TimerState = AppState.Stopped
-
-                End If
-
-            Case AppState.Initial
-
-                If StartButton.Rect.Contains(e.Location) Then
-
-                    StartTimer()
-
-                End If
-
-            Case AppState.Stopped
-
-                If RestartButton.Rect.Contains(e.Location) Then
-
-                    TimerState = AppState.Running
-
-                    StartTime = Now
-
-                End If
-
-            Case AppState.Running
-
-                If PauseButton.Rect.Contains(e.Location) Then
-
-                    TogglePause()
-
-                End If
-
-            Case AppState.Paused
-
-                TogglePause()
-
-        End Select
-
-    End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
