@@ -1090,8 +1090,15 @@ Public Class Form1
             Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
             Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
 
+            If hours > 23 Then hours = 23
+            If minutes > 59 Then minutes = 59
+            If seconds > 59 Then seconds = 59
+
+
             ' Create and return the TimeSpan
             Duration = New TimeSpan(hours, minutes, seconds)
+
+            InitialEntry = Duration.Hours & Duration.Minutes.ToString & Duration.Seconds.ToString
 
             TimerState = AppState.Running
 
