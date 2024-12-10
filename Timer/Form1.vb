@@ -1094,7 +1094,6 @@ Public Class Form1
             If minutes > 59 Then minutes = 59
             If seconds > 59 Then seconds = 59
 
-
             ' Create and return the TimeSpan
             Duration = New TimeSpan(hours, minutes, seconds)
 
@@ -1385,13 +1384,13 @@ Public Class Form1
 
         Dim FontSize As Single
 
-        If ClientSize.Height / 10 > 45 Then
+        If ClientSize.Height / 13 > 35 Then
 
-            FontSize = ClientSize.Height / 10
+            FontSize = ClientSize.Height / 13
 
         Else
 
-            FontSize = 45
+            FontSize = 35
 
         End If
 
