@@ -792,14 +792,14 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateMainDisplayPaused()
-        'UpdateMainDisplayPaused
+
         Dim RemainingTime As TimeSpan = Duration - ElapsedTime
 
         ' Do we have hours?
         If RemainingTime.Hours > 0 Then
             ' Yes, we have hours.
 
-            ' Show hours.
+            ' Show hours, minutes and seconds.
             MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
 
         Else
@@ -823,7 +823,7 @@ Public Class Form1
                     MainDisplay.Text = RemainingTime.Seconds.ToString
 
                 Else
-                    ' No, don't have seconds.
+                    ' No, we don't have seconds.
 
                     ' Show milliseconds.
                     MainDisplay.Text = RemainingTime.ToString("ff").TrimStart("0")
@@ -833,6 +833,7 @@ Public Class Form1
             End If
 
         End If
+
     End Sub
 
     Private Sub UpdateMainDisplayInitial()
