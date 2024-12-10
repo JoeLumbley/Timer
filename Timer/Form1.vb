@@ -211,6 +211,7 @@ Public Class Form1
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
 
         Select Case TimerState
+
             Case AppState.Completed
 
                 If StopButton.Rect.Contains(e.Location) Then
@@ -247,7 +248,11 @@ Public Class Form1
 
             Case AppState.Paused
 
-                TogglePause()
+                If ResumeButton.Rect.Contains(e.Location) Then
+
+                    TogglePause()
+
+                End If
 
         End Select
 
