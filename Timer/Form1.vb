@@ -107,7 +107,7 @@ Public Class Form1
 
     Private RatioDegDuration As Single
 
-    ' Define the start angle angle (in degrees)
+    ' Define the start angle in degrees at -90 or 12 o'clock.
     Private Const startAngle As Single = -90.0F
 
     Private sweepAngle As Single
@@ -207,29 +207,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateSound()
-
-        Select Case TimerState
-
-            Case AppState.Completed
-
-                If Not IsPlaying("timesup") Then
-
-                    LoopSound("timesup")
-
-                End If
-
-            Case AppState.Stopped
-
-                If IsPlaying("timesup") Then
-
-                    PauseSound("timesup")
-
-                End If
-
-        End Select
-
-    End Sub
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
@@ -243,8 +220,10 @@ Public Class Form1
                 .CompositingMode = Drawing2D.CompositingMode.SourceOver
                 .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
                 .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-                .PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+                .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
                 .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                .InterpolationMode = InterpolationMode.HighQualityBicubic
+                .TextContrast = SmoothingMode.HighQuality
 
             End With
 
@@ -279,6 +258,30 @@ Public Class Form1
             StartTime = DateTime.Now - ElapsedTime
 
         End If
+
+    End Sub
+
+    Private Sub UpdateSound()
+
+        Select Case TimerState
+
+            Case AppState.Completed
+
+                If Not IsPlaying("timesup") Then
+
+                    LoopSound("timesup")
+
+                End If
+
+            Case AppState.Stopped
+
+                If IsPlaying("timesup") Then
+
+                    PauseSound("timesup")
+
+                End If
+
+        End Select
 
     End Sub
 
