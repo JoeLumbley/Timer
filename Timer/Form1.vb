@@ -767,25 +767,25 @@ Public Class Form1
 
         Select Case TimerState
 
+            Case AppState.Initial
+
+                UpdateMainDisplayInitial()
+
             Case AppState.Running
 
                 UpdateMainDisplayRunning()
+
+            Case AppState.Completed
+
+                MainDisplay.Text = "0"
 
             Case AppState.Stopped
 
                 UpdateMainDisplayStopped()
 
-            Case AppState.Initial
-
-                UpdateMainDisplayInitial()
-
             Case AppState.Paused
 
                 UpdateMainDisplayPaused()
-
-            Case AppState.Completed
-
-                MainDisplay.Text = "0"
 
         End Select
 
