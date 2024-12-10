@@ -200,24 +200,7 @@ Public Class Form1
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
-        ' Allocate the buffer if it hasn't been allocated yet
-        If Buffer Is Nothing Then
-
-            Buffer = Context.Allocate(e.Graphics, ClientRectangle)
-
-            With Buffer.Graphics
-
-                .CompositingMode = Drawing2D.CompositingMode.SourceOver
-                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-                .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-                .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-                .InterpolationMode = InterpolationMode.HighQualityBicubic
-                .TextContrast = SmoothingMode.HighQuality
-
-            End With
-
-        End If
+        AllocateBuffer(e)
 
         DrawDisplays()
 
@@ -657,6 +640,29 @@ Public Class Form1
     Private Sub UpdateDisplays()
 
         UpdateMainDisplay()
+
+    End Sub
+
+    Private Sub AllocateBuffer(e As PaintEventArgs)
+
+        ' Allocate the buffer if it hasn't been allocated yet
+        If Buffer Is Nothing Then
+
+            Buffer = Context.Allocate(e.Graphics, ClientRectangle)
+
+            With Buffer.Graphics
+
+                .CompositingMode = Drawing2D.CompositingMode.SourceOver
+                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+                .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+                .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                .InterpolationMode = InterpolationMode.HighQualityBicubic
+                .TextContrast = SmoothingMode.HighQuality
+
+            End With
+
+        End If
 
     End Sub
 
