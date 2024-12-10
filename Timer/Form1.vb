@@ -178,16 +178,7 @@ Public Class Form1
 
             ResizeCircleOfProgress()
 
-            ' Dispose of the existing buffer
-            If Buffer IsNot Nothing Then
-
-                Buffer.Dispose()
-
-                Buffer = Nothing ' Set to Nothing to avoid using a disposed object
-
-                ' The buffer will be reallocated in OnPaint
-
-            End If
+            DisposeBuffer()
 
         End If
 
@@ -206,7 +197,6 @@ Public Class Form1
         UpdateSound()
 
     End Sub
-
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
@@ -240,6 +230,25 @@ Public Class Form1
         UpdateMainDisplay()
 
     End Sub
+
+    Private Sub DisposeBuffer()
+
+        ' Dispose of the existing buffer
+        If Buffer IsNot Nothing Then
+
+            Buffer.Dispose()
+
+            Buffer = Nothing ' Set to Nothing to avoid using a disposed object
+
+            ' The buffer will be reallocated in OnPaint
+
+        End If
+
+    End Sub
+
+
+
+
 
     Private Sub TogglePause()
 
