@@ -374,8 +374,104 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateMainDisplay()
 
+        Select Case TimerState
 
+            Case AppState.Initial
+
+                UpdateMainDisplayInitial()
+
+            Case AppState.Running
+
+                UpdateMainDisplayRunning()
+
+            Case AppState.Completed
+
+                MainDisplay.Text = "0"
+
+            Case AppState.Stopped
+
+                UpdateMainDisplayStopped()
+
+            Case AppState.Paused
+
+                UpdateMainDisplayPaused()
+
+        End Select
+
+    End Sub
+
+    Private Sub UpdateMainDisplayPaused()
+
+        Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+
+        ' Do we have hours?
+        If RemainingTime.Hours > 0 Then
+            ' Yes, we have hours.
+
+            ' Show hours, minutes and seconds.
+            MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
+
+        Else
+            ' No, we don't have hours.
+
+            ' Do we have minutes?
+            If RemainingTime.Minutes > 0 Then
+                'Yes, we have minutes.
+
+                ' Show minutes.
+                MainDisplay.Text = RemainingTime.ToString("m\:ss")
+
+            Else
+                ' No, we don't have minutes.
+
+                ' Do we have seconds?
+                If RemainingTime.Seconds > 0 Then
+                    ' Yes, we have seconds.
+
+                    ' Show seconds.
+                    MainDisplay.Text = RemainingTime.Seconds.ToString
+
+                Else
+                    ' No, we don't have seconds.
+
+                    ' Show milliseconds.
+                    MainDisplay.Text = RemainingTime.ToString("ff").TrimStart("0")
+
+                End If
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub UpdateMainDisplayInitial()
+
+        ' Has the user entered a time?
+        If Not InitialEntry = String.Empty Then
+            ' Yes, the user has entered a time.
+
+            ' Ensure the input string is padded to at least 6 digits
+            Dim PaddedInitialEntry As String = InitialEntry.PadLeft(6, "0"c)
+
+            ' Extract hours, minutes, and seconds from the string
+            Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
+            Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
+            Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
+
+            InitialDisplay.Text = hours.ToString.PadLeft(2, "0"c) & "h " & minutes.ToString.PadLeft(2, "0"c) & "m " & seconds.ToString.PadLeft(2, "0"c) & "s"
+
+        Else
+            ' No, the user has not entered a time.
+
+            ' Show zeros.
+            InitialDisplay.Text = "00h " & "00m " & "00s"
+
+        End If
+
+    End Sub
 
 
 
@@ -715,11 +811,6 @@ Public Class Form1
 
     End Sub
 
-
-
-
-
-
     Private Sub FillRoundedRectangle(brush As Brush, Rect As Rectangle, radius As Integer, g As Graphics)
 
         Dim Path As New GraphicsPath()
@@ -754,104 +845,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateMainDisplay()
 
-        Select Case TimerState
-
-            Case AppState.Initial
-
-                UpdateMainDisplayInitial()
-
-            Case AppState.Running
-
-                UpdateMainDisplayRunning()
-
-            Case AppState.Completed
-
-                MainDisplay.Text = "0"
-
-            Case AppState.Stopped
-
-                UpdateMainDisplayStopped()
-
-            Case AppState.Paused
-
-                UpdateMainDisplayPaused()
-
-        End Select
-
-    End Sub
-
-    Private Sub UpdateMainDisplayPaused()
-
-        Dim RemainingTime As TimeSpan = Duration - ElapsedTime
-
-        ' Do we have hours?
-        If RemainingTime.Hours > 0 Then
-            ' Yes, we have hours.
-
-            ' Show hours, minutes and seconds.
-            MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
-
-        Else
-            ' No, we don't have hours.
-
-            ' Do we have minutes?
-            If RemainingTime.Minutes > 0 Then
-                'Yes, we have minutes.
-
-                ' Show minutes.
-                MainDisplay.Text = RemainingTime.ToString("m\:ss")
-
-            Else
-                ' No, we don't have minutes.
-
-                ' Do we have seconds?
-                If RemainingTime.Seconds > 0 Then
-                    ' Yes, we have seconds.
-
-                    ' Show seconds.
-                    MainDisplay.Text = RemainingTime.Seconds.ToString
-
-                Else
-                    ' No, we don't have seconds.
-
-                    ' Show milliseconds.
-                    MainDisplay.Text = RemainingTime.ToString("ff").TrimStart("0")
-
-                End If
-
-            End If
-
-        End If
-
-    End Sub
-
-    Private Sub UpdateMainDisplayInitial()
-
-        ' Has the user entered a time?
-        If Not InitialEntry = String.Empty Then
-            ' Yes, the user has entered a time.
-
-            ' Ensure the input string is padded to at least 6 digits
-            Dim PaddedInitialEntry As String = InitialEntry.PadLeft(6, "0"c)
-
-            ' Extract hours, minutes, and seconds from the string
-            Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
-            Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
-            Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
-
-            InitialDisplay.Text = hours.ToString.PadLeft(2, "0"c) & "h " & minutes.ToString.PadLeft(2, "0"c) & "m " & seconds.ToString.PadLeft(2, "0"c) & "s"
-
-        Else
-            ' No, the user has not entered a time.
-
-            ' Show zeros.
-            InitialDisplay.Text = "00h " & "00m " & "00s"
-
-        End If
-
-    End Sub
 
     Private Sub UpdateMainDisplayStopped()
 
