@@ -1097,7 +1097,7 @@ Public Class Form1
             ' Create and return the TimeSpan
             Duration = New TimeSpan(hours, minutes, seconds)
 
-            InitialEntry = Duration.Hours & Duration.Minutes.ToString & Duration.Seconds.ToString
+            InitialEntry = Duration.Hours.ToString & Duration.Minutes.ToString & Duration.Seconds.ToString
 
             TimerState = AppState.Running
 
