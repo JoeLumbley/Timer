@@ -773,46 +773,7 @@ Public Class Form1
 
             Case AppState.Stopped
 
-                ' Do we have hours?
-                If Duration.Hours > 0 Then
-                    ' Yes, we have hours.
-
-                    ' Show hours, minutes and seconds.
-                    MainDisplay.Text = Duration.ToString("h\:mm\:ss")
-
-                Else
-                    ' No, we don't have hours.
-
-                    ' Do we have minutes?
-                    If Duration.Minutes > 0 Then
-                        ' Yes, we have minutes.
-
-                        ' Show minutes and seconds.
-                        MainDisplay.Text = Duration.ToString("m\:ss")
-
-                        'MainDisplay.Text = RemainingTime.ToString("s\:fff")
-
-                    Else
-                        ' No, we don't have minutes.
-
-                        ' Do we have seconds?
-                        If Duration.Seconds > 0 Then
-                            ' Yes, we have seconds.
-
-                            ' Show seconds.
-                            MainDisplay.Text = Duration.Seconds.ToString
-
-                        Else
-                            ' No, we don't have seconds.
-
-                            ' Show milliseconds.
-                            MainDisplay.Text = Duration.ToString("ff").TrimStart("0")
-
-                        End If
-
-                    End If
-
-                End If
+                UpdateMainDisplayStopped()
 
             Case AppState.Initial
 
@@ -884,6 +845,51 @@ Public Class Form1
                 MainDisplay.Text = "0"
 
         End Select
+
+    End Sub
+
+    Private Sub UpdateMainDisplayStopped()
+
+        ' Do we have hours?
+        If Duration.Hours > 0 Then
+            ' Yes, we have hours.
+
+            ' Show hours, minutes and seconds.
+            MainDisplay.Text = Duration.ToString("h\:mm\:ss")
+
+        Else
+            ' No, we don't have hours.
+
+            ' Do we have minutes?
+            If Duration.Minutes > 0 Then
+                ' Yes, we have minutes.
+
+                ' Show minutes and seconds.
+                MainDisplay.Text = Duration.ToString("m\:ss")
+
+                'MainDisplay.Text = RemainingTime.ToString("s\:fff")
+
+            Else
+                ' No, we don't have minutes.
+
+                ' Do we have seconds?
+                If Duration.Seconds > 0 Then
+                    ' Yes, we have seconds.
+
+                    ' Show seconds.
+                    MainDisplay.Text = Duration.Seconds.ToString
+
+                Else
+                    ' No, we don't have seconds.
+
+                    ' Show milliseconds.
+                    MainDisplay.Text = Duration.ToString("ff").TrimStart("0")
+
+                End If
+
+            End If
+
+        End If
 
     End Sub
 
