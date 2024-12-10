@@ -197,6 +197,18 @@ Public Class Form1
 
         UpdateDisplays()
 
+        If Not WindowState = FormWindowState.Minimized Then
+
+            Refresh() ' Calls OnPaint Sub
+
+        End If
+
+        UpdateSound()
+
+    End Sub
+
+    Private Sub UpdateSound()
+
         Select Case TimerState
 
             Case AppState.Completed
@@ -216,12 +228,6 @@ Public Class Form1
                 End If
 
         End Select
-
-        If Not WindowState = FormWindowState.Minimized Then
-
-            Refresh() ' Calls OnPaint Sub
-
-        End If
 
     End Sub
 
