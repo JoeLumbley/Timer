@@ -105,25 +105,12 @@ Public Class Form1
 
     Private CircleOfProgressBackgroundPen As Pen
 
-
-
-
     Private RatioDegDuration As Single
 
-
-    ' Define the bounding rectangle for the arc
-    'Private rect As New Rectangle(50, 50, 100, 100)
-
-    ' Define the start angle and sweep angle (in degrees)
+    ' Define the start angle angle (in degrees)
     Private Const startAngle As Single = -90.0F
+
     Private sweepAngle As Single
-
-
-
-
-
-
-
 
     Private StopButton As ButtonStruct
 
@@ -151,7 +138,7 @@ Public Class Form1
 
         AddSound("timesup", $"{Application.StartupPath}timesup.mp3")
 
-        SetVolume("timesup", 800)
+        SetVolume("timesup", 500)
 
         StopButton.Text = "■"
 
@@ -655,21 +642,6 @@ Public Class Form1
 
                             .DrawString(PauseButton.Text, PauseButton.Font, Brushes.Black, PauseButton.TextLocation, AlineCenterMiddle)
 
-
-
-                            'Dim RemainingTime As TimeSpan = Duration - ElapsedTime
-
-                            'Dim Ratio As Single = 360 / Duration.TotalSeconds
-
-
-                            '' Define the bounding rectangle for the arc
-                            'Dim rect As New Rectangle(50, 50, 100, 100)
-
-                            '' Define the start angle and sweep angle (in degrees)
-                            'Dim startAngle As Single = -90.0F
-                            'Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
-
-                            ' Draw the arc
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
                         Case AppState.Stopped
@@ -677,7 +649,6 @@ Public Class Form1
                             .Clear(Color.Black)
 
                             .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
-
 
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
@@ -709,27 +680,12 @@ Public Class Form1
 
                             .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
 
-
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
                             FillRoundedRectangle(Brushes.White, ResumeButton.Rect, ResumeButton.Radius, Buffer.Graphics)
 
                             .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
 
-
-                            'Dim RemainingTime As TimeSpan = Duration - ElapsedTime
-
-                            'Dim Ratio As Single = 360 / Duration.TotalSeconds
-
-
-                            '' Define the bounding rectangle for the arc
-                            'Dim rect As New Rectangle(50, 50, 100, 100)
-
-                            '' Define the start angle and sweep angle (in degrees)
-                            'Dim startAngle As Single = -90.0F
-                            'Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
-
-                            ' Draw the arc
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
                     End Select
@@ -980,7 +936,6 @@ Public Class Form1
 
         RatioDegDuration = 360 / Duration.TotalSeconds
 
-        'startAngle = -90.0F
         sweepAngle = RatioDegDuration * ElapsedTime.TotalSeconds
 
     End Sub
