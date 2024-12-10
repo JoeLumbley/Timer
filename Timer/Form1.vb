@@ -473,6 +473,203 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateMainDisplayStopped()
+
+        ' Do we have hours?
+        If Duration.Hours > 0 Then
+            ' Yes, we have hours.
+
+            ' Show hours, minutes and seconds.
+            MainDisplay.Text = Duration.ToString("h\:mm\:ss")
+
+        Else
+            ' No, we don't have hours.
+
+            ' Do we have minutes?
+            If Duration.Minutes > 0 Then
+                ' Yes, we have minutes.
+
+                ' Show minutes and seconds.
+                MainDisplay.Text = Duration.ToString("m\:ss")
+
+            Else
+                ' No, we don't have minutes.
+
+                ' Do we have seconds?
+                If Duration.Seconds > 0 Then
+                    ' Yes, we have seconds.
+
+                    ' Show seconds.
+                    MainDisplay.Text = Duration.Seconds.ToString
+
+                Else
+                    ' No, we don't have seconds.
+
+                    ' Show milliseconds.
+                    MainDisplay.Text = Duration.ToString("ff").TrimStart("0")
+
+                End If
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub UpdateMainDisplayRunning()
+
+        ElapsedTime = DateTime.Now - StartTime
+
+        Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+
+        ' Do we have hours?
+        If RemainingTime.Hours > 0 Then
+            ' Yes, we have hours.
+
+            ' Show hours.
+            MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
+
+        Else
+            ' No, we don't have hours.
+
+            ' Do we have minutes?
+            If RemainingTime.Minutes > 0 Then
+                'Yes, we have minutes.
+
+                ' Show minutes.
+                MainDisplay.Text = RemainingTime.ToString("m\:ss")
+
+            Else
+                ' No, we don't have minutes.
+
+                ' Do we have seconds?
+                If RemainingTime.Seconds > 0 Then
+                    ' Yes, we have seconds.
+
+                    ' Show seconds.
+                    MainDisplay.Text = RemainingTime.Seconds.ToString
+
+                Else
+                    ' No, don't have seconds.
+
+                    ' Show milliseconds.
+                    MainDisplay.Text = RemainingTime.ToString("ff").TrimStart("0")
+
+                End If
+
+            End If
+
+        End If
+
+        ' Check if timer should complete
+        If ElapsedTime.TotalSeconds >= Duration.TotalSeconds Then
+
+            TimerState = AppState.Completed
+
+        End If
+
+        RatioDegDuration = 360 / Duration.TotalSeconds
+
+        sweepAngle = RatioDegDuration * ElapsedTime.TotalSeconds
+
+    End Sub
+
+    Private Sub InitializeForm()
+
+        CenterToScreen()
+
+        SetStyle(ControlStyles.UserPaint, True)
+
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+
+        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+
+        Text = "Timer⏳ - Code with Joe"
+
+        Me.WindowState = FormWindowState.Maximized
+
+    End Sub
+
+    Private Sub InitializeBuffer()
+
+        ' Set context to the context of this app.
+        Context = BufferedGraphicsManager.Current
+
+        Context.MaximumBuffer = Screen.PrimaryScreen.WorkingArea.Size
+
+        ' Allocate the buffer initially using the current client rectangle
+        Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
+
+        With Buffer.Graphics
+
+            .CompositingMode = Drawing2D.CompositingMode.SourceOver
+            .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+            .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+            .PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+            .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+
+        End With
+
+    End Sub
+
+    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+
+        CloseSounds()
+
+    End Sub
+
+    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
+
+        'Intentionally left blank. Do not remove.
+
+    End Sub
+
+    Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
+
+        Select Case TimerState
+            Case AppState.Completed
+
+                If StopButton.Rect.Contains(e.Location) Then
+
+                    TimerState = AppState.Stopped
+
+                End If
+
+            Case AppState.Initial
+
+                If StartButton.Rect.Contains(e.Location) Then
+
+                    StartTimer()
+
+                End If
+
+            Case AppState.Stopped
+
+                If RestartButton.Rect.Contains(e.Location) Then
+
+                    TimerState = AppState.Running
+
+                    StartTime = Now
+
+                End If
+
+            Case AppState.Running
+
+                If PauseButton.Rect.Contains(e.Location) Then
+
+                    TogglePause()
+
+                End If
+
+            Case AppState.Paused
+
+                TogglePause()
+
+        End Select
+
+    End Sub
+
+
 
 
 
@@ -845,159 +1042,6 @@ Public Class Form1
 
     End Sub
 
-
-
-    Private Sub UpdateMainDisplayStopped()
-
-        ' Do we have hours?
-        If Duration.Hours > 0 Then
-            ' Yes, we have hours.
-
-            ' Show hours, minutes and seconds.
-            MainDisplay.Text = Duration.ToString("h\:mm\:ss")
-
-        Else
-            ' No, we don't have hours.
-
-            ' Do we have minutes?
-            If Duration.Minutes > 0 Then
-                ' Yes, we have minutes.
-
-                ' Show minutes and seconds.
-                MainDisplay.Text = Duration.ToString("m\:ss")
-
-            Else
-                ' No, we don't have minutes.
-
-                ' Do we have seconds?
-                If Duration.Seconds > 0 Then
-                    ' Yes, we have seconds.
-
-                    ' Show seconds.
-                    MainDisplay.Text = Duration.Seconds.ToString
-
-                Else
-                    ' No, we don't have seconds.
-
-                    ' Show milliseconds.
-                    MainDisplay.Text = Duration.ToString("ff").TrimStart("0")
-
-                End If
-
-            End If
-
-        End If
-
-    End Sub
-
-    Private Sub UpdateMainDisplayRunning()
-
-        ElapsedTime = DateTime.Now - StartTime
-
-        Dim RemainingTime As TimeSpan = Duration - ElapsedTime
-
-        ' Do we have hours?
-        If RemainingTime.Hours > 0 Then
-            ' Yes, we have hours.
-
-            ' Show hours.
-            MainDisplay.Text = RemainingTime.ToString("h\:mm\:ss")
-
-        Else
-            ' No, we don't have hours.
-
-            ' Do we have minutes?
-            If RemainingTime.Minutes > 0 Then
-                'Yes, we have minutes.
-
-                ' Show minutes.
-                MainDisplay.Text = RemainingTime.ToString("m\:ss")
-
-            Else
-                ' No, we don't have minutes.
-
-                ' Do we have seconds?
-                If RemainingTime.Seconds > 0 Then
-                    ' Yes, we have seconds.
-
-                    ' Show seconds.
-                    MainDisplay.Text = RemainingTime.Seconds.ToString
-
-                Else
-                    ' No, don't have seconds.
-
-                    ' Show milliseconds.
-                    MainDisplay.Text = RemainingTime.ToString("ff").TrimStart("0")
-
-                End If
-
-            End If
-
-        End If
-
-        ' Check if timer should complete
-        If ElapsedTime.TotalSeconds >= Duration.TotalSeconds Then
-
-            TimerState = AppState.Completed
-
-        End If
-
-        RatioDegDuration = 360 / Duration.TotalSeconds
-
-        sweepAngle = RatioDegDuration * ElapsedTime.TotalSeconds
-
-    End Sub
-
-    Private Sub InitializeForm()
-
-        CenterToScreen()
-
-        SetStyle(ControlStyles.UserPaint, True)
-
-        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-
-        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
-
-        Text = "Timer⏳ - Code with Joe"
-
-        Me.WindowState = FormWindowState.Maximized
-
-    End Sub
-
-    Private Sub InitializeBuffer()
-
-        ' Set context to the context of this app.
-        Context = BufferedGraphicsManager.Current
-
-        Context.MaximumBuffer = Screen.PrimaryScreen.WorkingArea.Size
-
-        ' Allocate the buffer initially using the current client rectangle
-        Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
-
-        With Buffer.Graphics
-
-            .CompositingMode = Drawing2D.CompositingMode.SourceOver
-            .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-            .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-            .PixelOffsetMode = Drawing2D.PixelOffsetMode.None
-            .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-
-        End With
-
-    End Sub
-
-    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
-
-        CloseSounds()
-
-    End Sub
-
-    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
-
-        'Intentionally left blank. Do not remove.
-
-    End Sub
-
     Private Function AddSound(SoundName As String, FilePath As String) As Boolean
 
         'Do we have a name and does the file exist?
@@ -1280,50 +1324,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
-
-        Select Case TimerState
-            Case AppState.Completed
-
-                If StopButton.Rect.Contains(e.Location) Then
-
-                    TimerState = AppState.Stopped
-
-                End If
-
-            Case AppState.Initial
-
-                If StartButton.Rect.Contains(e.Location) Then
-
-                    StartTimer()
-
-                End If
-
-            Case AppState.Stopped
-
-                If RestartButton.Rect.Contains(e.Location) Then
-
-                    TimerState = AppState.Running
-
-                    StartTime = Now
-
-                End If
-
-            Case AppState.Running
-
-                If PauseButton.Rect.Contains(e.Location) Then
-
-                    TogglePause()
-
-                End If
-
-            Case AppState.Paused
-
-                TogglePause()
-
-        End Select
-
-    End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
