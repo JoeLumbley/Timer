@@ -193,6 +193,196 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        UpdateDisplays()
+
+        Select Case TimerState
+
+            Case AppState.Completed
+
+                If Not IsPlaying("timesup") Then
+
+                    LoopSound("timesup")
+
+                End If
+
+            Case AppState.Stopped
+
+                If IsPlaying("timesup") Then
+
+                    PauseSound("timesup")
+
+                End If
+
+        End Select
+
+        If Not WindowState = FormWindowState.Minimized Then
+
+            Refresh() ' Calls OnPaint Sub
+
+        End If
+
+    End Sub
+
+    Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+
+        ' Allocate the buffer if it hasn't been allocated yet
+        If Buffer Is Nothing Then
+
+            Buffer = Context.Allocate(e.Graphics, ClientRectangle)
+
+            With Buffer.Graphics
+
+                .CompositingMode = Drawing2D.CompositingMode.SourceOver
+                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+                .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+                .PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+
+            End With
+
+        End If
+
+        DrawDisplays()
+
+        Buffer.Render(e.Graphics)
+
+    End Sub
+
+    Private Sub UpdateDisplays()
+
+        UpdateMainDisplay()
+
+    End Sub
+
+    Private Sub TogglePause()
+
+        If TimerState = AppState.Running Then
+
+            TimerState = AppState.Paused
+
+            ' Store the elapsed time to resume from the same point
+            ElapsedTime = DateTime.Now - StartTime
+
+        ElseIf TimerState = AppState.Paused Then
+
+            TimerState = AppState.Running
+
+            ' Adjust the start time based on the paused duration
+            StartTime = DateTime.Now - ElapsedTime
+
+        End If
+
+    End Sub
+
+    Private Sub DrawDisplays()
+
+        If Buffer IsNot Nothing Then
+
+            Try
+
+                With Buffer.Graphics
+
+                    Select Case TimerState
+
+                        Case AppState.Completed
+
+                            .Clear(Color.LightSkyBlue)
+
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
+                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.MidnightBlue, MainDisplay.Location, AlineCenterMiddle)
+
+                            FillRoundedRectangle(Brushes.White, StopButton.Rect, StopButton.Radius, Buffer.Graphics)
+
+                            .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
+
+                        Case AppState.Running
+
+                            .Clear(Color.Black)
+
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
+                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
+
+                            FillRoundedRectangle(Brushes.White, PauseButton.Rect, PauseButton.Radius, Buffer.Graphics)
+
+                            .DrawString(PauseButton.Text, PauseButton.Font, Brushes.Black, PauseButton.TextLocation, AlineCenterMiddle)
+
+                            .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
+
+                        Case AppState.Stopped
+
+                            .Clear(Color.Black)
+
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
+                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
+
+                            FillRoundedRectangle(Brushes.White, RestartButton.Rect, RestartButton.Radius, Buffer.Graphics)
+
+                            .DrawString(RestartButton.Text, RestartButton.Font, Brushes.Black, RestartButton.TextLocation, AlineCenterMiddle)
+
+                        Case AppState.Initial
+
+                            .Clear(Color.Black)
+
+                            If Not InitialEntry = String.Empty Then
+
+                                .DrawString(InitialDisplay.Text, InitialDisplay.Font, Brushes.SkyBlue, InitialDisplay.Location, AlineCenterMiddle)
+
+                                FillRoundedRectangle(Brushes.White, StartButton.Rect, StartButton.Radius, Buffer.Graphics)
+
+                                .DrawString(StartButton.Text, StartButton.Font, Brushes.Black, StartButton.TextLocation, AlineCenterMiddle)
+
+                            Else
+
+                                .DrawString(InitialDisplay.Text, InitialDisplay.Font, Brushes.LightGray, InitialDisplay.Location, AlineCenterMiddle)
+
+                            End If
+
+                        Case AppState.Paused
+
+                            .Clear(Color.Black)
+
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
+                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
+
+                            FillRoundedRectangle(Brushes.White, ResumeButton.Rect, ResumeButton.Radius, Buffer.Graphics)
+
+                            .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
+
+                            .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
+
+                    End Select
+
+                End With
+
+            Catch ex As Exception
+
+                Debug.Print("Draw error: " & ex.Message)
+
+            End Try
+
+        Else
+
+            Debug.Print("Buffer is not initialized.")
+
+        End If
+
+    End Sub
+
+
+
+
+
+
+
+
+
+
     Private Sub ResizeResumeButton()
 
         Dim ButtonSize As Integer
@@ -525,186 +715,10 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        UpdateDisplays()
 
-        Select Case TimerState
 
-            Case AppState.Completed
 
-                If Not IsPlaying("timesup") Then
-
-                    LoopSound("timesup")
-
-                End If
-
-            Case AppState.Stopped
-
-                If IsPlaying("timesup") Then
-
-                    PauseSound("timesup")
-
-                End If
-
-        End Select
-
-        If Not WindowState = FormWindowState.Minimized Then
-
-            Refresh() ' Calls OnPaint Sub
-
-        End If
-
-    End Sub
-
-    Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
-
-        ' Allocate the buffer if it hasn't been allocated yet
-        If Buffer Is Nothing Then
-
-            Buffer = Context.Allocate(e.Graphics, ClientRectangle)
-
-            With Buffer.Graphics
-
-                .CompositingMode = Drawing2D.CompositingMode.SourceOver
-                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-                .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-                .PixelOffsetMode = Drawing2D.PixelOffsetMode.None
-                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-
-            End With
-
-        End If
-
-        DrawDisplays()
-
-        Buffer.Render(e.Graphics)
-
-    End Sub
-
-    Private Sub TogglePause()
-
-        If TimerState = AppState.Running Then
-
-            TimerState = AppState.Paused
-
-            ' Store the elapsed time to resume from the same point
-            ElapsedTime = DateTime.Now - StartTime
-
-        ElseIf TimerState = AppState.Paused Then
-
-            TimerState = AppState.Running
-
-            ' Adjust the start time based on the paused duration
-            StartTime = DateTime.Now - ElapsedTime
-
-        End If
-
-    End Sub
-
-    Private Sub UpdateDisplays()
-
-        UpdateMainDisplay()
-
-    End Sub
-
-    Private Sub DrawDisplays()
-
-        If Buffer IsNot Nothing Then
-
-            Try
-
-                With Buffer.Graphics
-
-                    Select Case TimerState
-
-                        Case AppState.Completed
-
-                            .Clear(Color.LightSkyBlue)
-
-                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
-
-                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.MidnightBlue, MainDisplay.Location, AlineCenterMiddle)
-
-                            FillRoundedRectangle(Brushes.White, StopButton.Rect, StopButton.Radius, Buffer.Graphics)
-
-                            .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
-
-                        Case AppState.Running
-
-                            .Clear(Color.Black)
-
-                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
-
-                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
-
-                            FillRoundedRectangle(Brushes.White, PauseButton.Rect, PauseButton.Radius, Buffer.Graphics)
-
-                            .DrawString(PauseButton.Text, PauseButton.Font, Brushes.Black, PauseButton.TextLocation, AlineCenterMiddle)
-
-                            .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
-
-                        Case AppState.Stopped
-
-                            .Clear(Color.Black)
-
-                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
-
-                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
-
-                            FillRoundedRectangle(Brushes.White, RestartButton.Rect, RestartButton.Radius, Buffer.Graphics)
-
-                            .DrawString(RestartButton.Text, RestartButton.Font, Brushes.Black, RestartButton.TextLocation, AlineCenterMiddle)
-
-                        Case AppState.Initial
-
-                            .Clear(Color.Black)
-
-                            If Not InitialEntry = String.Empty Then
-
-                                .DrawString(InitialDisplay.Text, InitialDisplay.Font, Brushes.SkyBlue, InitialDisplay.Location, AlineCenterMiddle)
-
-                                FillRoundedRectangle(Brushes.White, StartButton.Rect, StartButton.Radius, Buffer.Graphics)
-
-                                .DrawString(StartButton.Text, StartButton.Font, Brushes.Black, StartButton.TextLocation, AlineCenterMiddle)
-
-                            Else
-
-                                .DrawString(InitialDisplay.Text, InitialDisplay.Font, Brushes.LightGray, InitialDisplay.Location, AlineCenterMiddle)
-
-                            End If
-
-                        Case AppState.Paused
-
-                            .Clear(Color.Black)
-
-                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
-
-                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
-
-                            FillRoundedRectangle(Brushes.White, ResumeButton.Rect, ResumeButton.Radius, Buffer.Graphics)
-
-                            .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
-
-                            .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
-
-                    End Select
-
-                End With
-
-            Catch ex As Exception
-
-                Debug.Print("Draw error: " & ex.Message)
-
-            End Try
-
-        Else
-
-            Debug.Print("Buffer is not initialized.")
-
-        End If
-
-    End Sub
 
     Private Sub FillRoundedRectangle(brush As Brush, Rect As Rectangle, radius As Integer, g As Graphics)
 
