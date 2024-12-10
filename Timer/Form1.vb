@@ -107,6 +107,24 @@ Public Class Form1
 
 
 
+
+    Private RatioDegDuration As Single
+
+
+    ' Define the bounding rectangle for the arc
+    'Private rect As New Rectangle(50, 50, 100, 100)
+
+    ' Define the start angle and sweep angle (in degrees)
+    Private Const startAngle As Single = -90.0F
+    Private sweepAngle As Single
+
+
+
+
+
+
+
+
     Private StopButton As ButtonStruct
 
     Private StartButton As ButtonStruct
@@ -639,17 +657,17 @@ Public Class Form1
 
 
 
-                            Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+                            'Dim RemainingTime As TimeSpan = Duration - ElapsedTime
 
-                            Dim Ratio As Single = 360 / Duration.TotalSeconds
+                            'Dim Ratio As Single = 360 / Duration.TotalSeconds
 
 
-                            ' Define the bounding rectangle for the arc
-                            Dim rect As New Rectangle(50, 50, 100, 100)
+                            '' Define the bounding rectangle for the arc
+                            'Dim rect As New Rectangle(50, 50, 100, 100)
 
-                            ' Define the start angle and sweep angle (in degrees)
-                            Dim startAngle As Single = -90.0F
-                            Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
+                            '' Define the start angle and sweep angle (in degrees)
+                            'Dim startAngle As Single = -90.0F
+                            'Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
 
                             ' Draw the arc
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
@@ -699,17 +717,17 @@ Public Class Form1
                             .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
 
 
-                            Dim RemainingTime As TimeSpan = Duration - ElapsedTime
+                            'Dim RemainingTime As TimeSpan = Duration - ElapsedTime
 
-                            Dim Ratio As Single = 360 / Duration.TotalSeconds
+                            'Dim Ratio As Single = 360 / Duration.TotalSeconds
 
 
-                            ' Define the bounding rectangle for the arc
-                            Dim rect As New Rectangle(50, 50, 100, 100)
+                            '' Define the bounding rectangle for the arc
+                            'Dim rect As New Rectangle(50, 50, 100, 100)
 
-                            ' Define the start angle and sweep angle (in degrees)
-                            Dim startAngle As Single = -90.0F
-                            Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
+                            '' Define the start angle and sweep angle (in degrees)
+                            'Dim startAngle As Single = -90.0F
+                            'Dim sweepAngle As Single = Ratio * -ElapsedTime.TotalSeconds
 
                             ' Draw the arc
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
@@ -959,6 +977,11 @@ Public Class Form1
             TimerState = AppState.Completed
 
         End If
+
+        RatioDegDuration = 360 / Duration.TotalSeconds
+
+        'startAngle = -90.0F
+        sweepAngle = RatioDegDuration * ElapsedTime.TotalSeconds
 
     End Sub
 
