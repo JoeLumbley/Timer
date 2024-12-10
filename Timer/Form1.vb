@@ -1063,11 +1063,11 @@ Public Class Form1
 
         End If
 
-        If TimerState = AppState.Running Then
+        'If TimerState = AppState.Running Then
 
-            TimerState = AppState.Initial
+        '    TimerState = AppState.Initial
 
-        End If
+        'End If
 
     End Sub
 
