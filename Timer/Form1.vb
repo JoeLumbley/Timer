@@ -294,9 +294,25 @@ Public Class Form1
 
             Case Keys.Escape
 
-                ReturnToInitialEntryScreen()
+                Select Case TimerState
 
-                DeleteLastInitialEntryCharacter()
+                    Case AppState.Stopped
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Paused
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Running
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Initial
+
+                        DeleteLastInitialEntryCharacter()
+
+                End Select
 
             Case Keys.Pause
 
@@ -1042,6 +1058,12 @@ Public Class Form1
     Private Sub ReturnToInitialEntryScreen()
 
         If TimerState = AppState.Stopped Then
+
+            TimerState = AppState.Initial
+
+        End If
+
+        If TimerState = AppState.Running Then
 
             TimerState = AppState.Initial
 
