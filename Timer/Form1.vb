@@ -467,47 +467,53 @@ Public Class Form1
         MainDisplay.Location.X = ClientSize.Width / 2
         MainDisplay.Location.Y = ClientSize.Height / 2
 
-        'CircleOfProgress.Width = ClientSize.Height / 2
-        'CircleOfProgress.Height = ClientSize.Height / 2
-        'CircleOfProgress.X = ClientSize.Width / 2 - CircleOfProgress.Width / 2
-        'CircleOfProgress.Y = ClientSize.Height / 2 - CircleOfProgress.Height / 2
-
-
     End Sub
 
     Private Sub ResizeCircleOfProgress()
 
         Dim PenSize As Single
 
-        If ClientSize.Height / 30 > 5 Then
+        If ClientSize.Height / 30 > 15 Then
 
             PenSize = ClientSize.Height / 30
 
         Else
 
-            PenSize = 5
+            PenSize = 15
 
         End If
 
         CircleOfProgressBackgroundPen = New Pen(Color.DimGray, PenSize)
 
-        If ClientSize.Height / 40 > 5 Then
+        If ClientSize.Height / 40 > 10 Then
 
             PenSize = ClientSize.Height / 40
 
         Else
 
-            PenSize = 5
+            PenSize = 10
 
         End If
 
-        CircleOfProgressPen = New Pen(Color.LightSkyBlue, PenSize)
+        CircleOfProgressPen = New Pen(Color.LightSkyBlue, PenSize) With {
+            .EndCap = LineCap.Round,
+            .StartCap = LineCap.Round
+        }
 
-        CircleOfProgressPen.EndCap = LineCap.Round
-        CircleOfProgressPen.StartCap = LineCap.Round
+        Dim CircleSize As Single
 
-        CircleOfProgress.Width = ClientSize.Height / 1.5
-        CircleOfProgress.Height = ClientSize.Height / 1.5
+        If ClientSize.Height / 1.5 > 300 Then
+
+            CircleSize = ClientSize.Height / 1.5
+
+        Else
+
+            CircleSize = 300
+
+        End If
+
+        CircleOfProgress.Width = CircleSize
+        CircleOfProgress.Height = CircleSize
 
         CircleOfProgress.X = ClientSize.Width / 2 - CircleOfProgress.Width / 2
         CircleOfProgress.Y = ClientSize.Height / 2 - CircleOfProgress.Height / 2
@@ -521,8 +527,6 @@ Public Class Form1
         Select Case TimerState
 
             Case AppState.Completed
-
-                ' Play Times Up sound
 
                 If Not IsPlaying("timesup") Then
 
@@ -621,10 +625,6 @@ Public Class Form1
 
                             .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
 
-
-
-
-
                         Case AppState.Running
 
                             .Clear(Color.Black)
@@ -657,6 +657,9 @@ Public Class Form1
                         Case AppState.Stopped
 
                             .Clear(Color.Black)
+
+                            .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
+
 
                             .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
@@ -1744,6 +1747,9 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Form1_MaximizedBoundsChanged(sender As Object, e As EventArgs) Handles Me.MaximizedBoundsChanged
+
+    End Sub
 End Class
 
 ' Monica is our an AI assistant.
