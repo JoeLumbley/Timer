@@ -669,12 +669,413 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
 
+        Select Case e.KeyValue
 
+            Case Keys.Back
 
+                ReturnToInitialEntryScreen()
 
+                DeleteLastInitialEntryCharacter()
 
+            Case Keys.Delete
 
+                ReturnToInitialEntryScreen()
+
+                DeleteLastInitialEntryCharacter()
+
+            Case Keys.X
+
+                ReturnToInitialEntryScreen()
+
+                DeleteLastInitialEntryCharacter()
+
+            Case Keys.Escape
+
+                ReturnToInitialEntryScreen()
+
+                DeleteLastInitialEntryCharacter()
+
+            Case Keys.Pause
+
+                TogglePause()
+
+            Case Keys.P
+
+                TogglePause()
+
+            Case Keys.D0
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        If Not InitialEntry = String.Empty Then
+
+                            InitialEntry = InitialEntry & "0"
+
+                        End If
+
+                    End If
+
+                End If
+
+            Case Keys.D1
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "1"
+
+                    End If
+
+                End If
+
+            Case Keys.D2
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "2"
+
+                    End If
+
+                End If
+
+            Case Keys.D3
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "3"
+
+                    End If
+
+                End If
+
+            Case Keys.D4
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "4"
+
+                    End If
+
+                End If
+
+            Case Keys.D5
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "5"
+
+                    End If
+
+                End If
+
+            Case Keys.D6
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "6"
+
+                    End If
+
+                End If
+
+            Case Keys.D7
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "7"
+
+                    End If
+
+                End If
+
+            Case Keys.D8
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "8"
+
+                    End If
+
+                End If
+
+            Case Keys.D9
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "9"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad0
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        If Not InitialEntry = String.Empty Then
+
+                            InitialEntry = InitialEntry & "0"
+
+                        End If
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad1
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "1"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad2
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "2"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad3
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "3"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad4
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "4"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad5
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "5"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad6
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "6"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad7
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "7"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad8
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "8"
+
+                    End If
+
+                End If
+
+            Case Keys.NumPad9
+
+                ReturnToInitialEntryScreen()
+
+                If TimerState = AppState.Initial Then
+
+                    If InitialEntry.Length < 6 Then
+
+                        InitialEntry = InitialEntry & "9"
+
+                    End If
+
+                End If
+
+            Case Keys.Enter
+
+                Select Case TimerState
+
+                    Case AppState.Initial
+
+                        StartTimer()
+
+                    Case AppState.Stopped
+
+                        TimerState = AppState.Running
+
+                        StartTime = Now
+
+                    Case AppState.Completed
+
+                        TimerState = AppState.Stopped
+
+                    Case AppState.Paused
+
+                        TogglePause()
+
+                    Case AppState.Running
+
+                        TogglePause()
+
+                End Select
+
+        End Select
+
+    End Sub
+
+    Private Sub ReturnToInitialEntryScreen()
+
+        If TimerState = AppState.Stopped Then
+
+            TimerState = AppState.Initial
+
+        End If
+
+    End Sub
+
+    Private Sub StartTimer()
+
+        ' Did the user enter a duration?
+        If Not InitialEntry = String.Empty Then
+            ' Yes, the user did enter a duration.
+
+            ' Ensure the input string is padded to at least 6 digits
+            Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
+
+            ' Extract hours, minutes, and seconds from the string
+            Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
+            Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
+            Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
+
+            ' Create and return the TimeSpan
+            Duration = New TimeSpan(hours, minutes, seconds)
+
+            TimerState = AppState.Running
+
+            StartTime = Now
+
+        End If
+
+    End Sub
+
+    Private Sub DeleteLastInitialEntryCharacter()
+
+        If TimerState = AppState.Initial Then
+
+            ' Are there character to delete?
+            If InitialEntry.Length > 0 Then
+                ' Yes, there are character to delete.
+
+                ' Delete the last character in the initial entry string.
+                InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
+
+            End If
+
+        End If
+
+    End Sub
 
     Private Sub ResizeResumeButton()
 
@@ -1312,6 +1713,7 @@ Public Class Form1
         End If
 
     End Sub
+
     Private Sub CreateSoundFileFromResource()
 
         Dim FilePath As String = Path.Combine(Application.StartupPath, "timesup.mp3")
@@ -1324,418 +1726,6 @@ Public Class Form1
 
     End Sub
 
-
-    Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-
-        Select Case e.KeyValue
-
-            Case Keys.Back
-
-                ReturnToInitialEntryScreen()
-
-                DeleteLastInitialEntryCharacter()
-
-            Case Keys.Delete
-
-                ReturnToInitialEntryScreen()
-
-                DeleteLastInitialEntryCharacter()
-
-            Case Keys.X
-
-                ReturnToInitialEntryScreen()
-
-                DeleteLastInitialEntryCharacter()
-
-            Case Keys.Escape
-
-                ReturnToInitialEntryScreen()
-
-                DeleteLastInitialEntryCharacter()
-
-            Case Keys.Pause
-
-                TogglePause()
-
-            Case Keys.P
-
-                TogglePause()
-
-            Case Keys.D0
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        If Not InitialEntry = String.Empty Then
-
-                            InitialEntry = InitialEntry & "0"
-
-                        End If
-
-                    End If
-
-                End If
-
-            Case Keys.D1
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "1"
-
-                    End If
-
-                End If
-
-            Case Keys.D2
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "2"
-
-                    End If
-
-                End If
-
-            Case Keys.D3
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "3"
-
-                    End If
-
-                End If
-
-            Case Keys.D4
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "4"
-
-                    End If
-
-                End If
-
-            Case Keys.D5
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "5"
-
-                    End If
-
-                End If
-
-            Case Keys.D6
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "6"
-
-                    End If
-
-                End If
-
-            Case Keys.D7
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "7"
-
-                    End If
-
-                End If
-
-            Case Keys.D8
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "8"
-
-                    End If
-
-                End If
-
-            Case Keys.D9
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "9"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad0
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        If Not InitialEntry = String.Empty Then
-
-                            InitialEntry = InitialEntry & "0"
-
-                        End If
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad1
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "1"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad2
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "2"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad3
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "3"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad4
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "4"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad5
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "5"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad6
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "6"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad7
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "7"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad8
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "8"
-
-                    End If
-
-                End If
-
-            Case Keys.NumPad9
-
-                ReturnToInitialEntryScreen()
-
-                If TimerState = AppState.Initial Then
-
-                    If InitialEntry.Length < 6 Then
-
-                        InitialEntry = InitialEntry & "9"
-
-                    End If
-
-                End If
-
-            Case Keys.Enter
-
-                Select Case TimerState
-
-                    Case AppState.Initial
-
-                        StartTimer()
-
-                    Case AppState.Stopped
-
-                        TimerState = AppState.Running
-
-                        StartTime = Now
-
-                    Case AppState.Completed
-
-                        TimerState = AppState.Stopped
-
-                    Case AppState.Paused
-
-                        TogglePause()
-
-                    Case AppState.Running
-
-                        TogglePause()
-
-                End Select
-
-        End Select
-
-    End Sub
-
-    Private Sub ReturnToInitialEntryScreen()
-
-        If TimerState = AppState.Stopped Then
-
-            TimerState = AppState.Initial
-
-        End If
-
-    End Sub
-
-    Private Sub StartTimer()
-
-        ' Did the user enter a duration?
-        If Not InitialEntry = String.Empty Then
-            ' Yes, the user did enter a duration.
-
-            ' Ensure the input string is padded to at least 6 digits
-            Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
-
-            ' Extract hours, minutes, and seconds from the string
-            Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
-            Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
-            Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
-
-            ' Create and return the TimeSpan
-            Duration = New TimeSpan(hours, minutes, seconds)
-
-            TimerState = AppState.Running
-
-            StartTime = Now
-
-        End If
-
-    End Sub
-
-    Private Sub DeleteLastInitialEntryCharacter()
-
-        If TimerState = AppState.Initial Then
-
-            ' Are there character to delete?
-            If InitialEntry.Length > 0 Then
-                ' Yes, there are character to delete.
-
-                ' Delete the last character in the initial entry string.
-                InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
-
-            End If
-
-        End If
-
-    End Sub
-
-    Private Sub Form1_MaximizedBoundsChanged(sender As Object, e As EventArgs) Handles Me.MaximizedBoundsChanged
-
-    End Sub
 End Class
 
 ' Monica is our an AI assistant.
