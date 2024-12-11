@@ -157,6 +157,8 @@ Public Class Form1
 
         ResumeButton.Text = "▶"
 
+        StatusDisplay.Text = "Initial"
+
         Timer1.Interval = 15
 
         Timer1.Enabled = True
@@ -184,6 +186,8 @@ Public Class Form1
             ResizeResumeButton()
 
             ResizeCircleOfProgress()
+
+            ResizeStatusDisplay()
 
             DisposeBuffer()
 
@@ -225,6 +229,8 @@ Public Class Form1
 
                     TimerState = AppState.Stopped
 
+                    StatusDisplay.Text = "Stopped"
+
                 End If
 
             Case AppState.Initial
@@ -240,6 +246,8 @@ Public Class Form1
                 If RestartButton.Rect.Contains(e.Location) Then
 
                     TimerState = AppState.Running
+
+                    StatusDisplay.Text = "Running"
 
                     StartTime = Now
 
@@ -1407,7 +1415,6 @@ Public Class Form1
         InitialDisplay.Location.Y = ClientSize.Height / 2 - ButtonSize
 
     End Sub
-
     Private Sub ResizeMainDisplay()
 
         Dim FontSize As Single
@@ -1430,6 +1437,44 @@ Public Class Form1
         ' Center the main display in the client rectangle.
         MainDisplay.Location.X = ClientSize.Width / 2
         MainDisplay.Location.Y = ClientSize.Height / 2
+
+    End Sub
+
+    Private Sub ResizeStatusDisplay()
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 75 > 6 Then
+
+            FontSize = ClientSize.Height / 75
+
+        Else
+
+            FontSize = 6
+
+        End If
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        ' Set the font size for the  display based on the width of the client rectangle
+        StatusDisplay.Font = New Font("Segoe UI",
+                                    FontSize,
+                                    FontStyle.Regular)
+
+        ' Center the main display in the client rectangle.
+        StatusDisplay.Location.X = ClientSize.Width / 2
+
+        StatusDisplay.Location.Y = ClientSize.Height / 2 + ButtonSize * 3
 
     End Sub
 
