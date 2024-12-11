@@ -229,7 +229,7 @@ Public Class Form1
 
                     TimerState = AppState.Stopped
 
-                    StatusDisplay.Text = "Stopped"
+                    StatusDisplay.Text = "Stopped ⯃"
 
                 End If
 
@@ -247,7 +247,7 @@ Public Class Form1
 
                     TimerState = AppState.Running
 
-                    StatusDisplay.Text = "Running"
+                    StatusDisplay.Text = "Running 🏃‍"
 
                     StartTime = Now
 
@@ -625,11 +625,15 @@ Public Class Form1
 
                         TimerState = AppState.Running
 
+                        StatusDisplay.Text = "Running 🏃‍"
+
                         StartTime = Now
 
                     Case AppState.Completed
 
                         TimerState = AppState.Stopped
+
+                        StatusDisplay.Text = "Stopped ⯃"
 
                     Case AppState.Paused
 
@@ -707,12 +711,16 @@ Public Class Form1
 
             TimerState = AppState.Paused
 
+            StatusDisplay.Text = "Paused ⏸"
+
             ' Store the elapsed time to resume from the same point
             ElapsedTime = DateTime.Now - StartTime
 
         ElseIf TimerState = AppState.Paused Then
 
             TimerState = AppState.Running
+
+            StatusDisplay.Text = "Running 🏃‍"
 
             ' Adjust the start time based on the paused duration
             StartTime = DateTime.Now - ElapsedTime
@@ -757,7 +765,7 @@ Public Class Form1
 
                         Case AppState.Completed
 
-                            .Clear(Color.Gray)
+                            .Clear(Color.DimGray)
 
                             .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
 
@@ -765,7 +773,7 @@ Public Class Form1
 
                             FillRoundedRectangle(Brushes.White, StopButton.Rect, StopButton.Radius, Buffer.Graphics)
 
-                            .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
+                            .DrawString(StopButton.Text, StopButton.Font, Brushes.Black, StopButton.TextLocation, AlineCenterMiddle)
 
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
@@ -1056,6 +1064,8 @@ Public Class Form1
 
             TimerState = AppState.Completed
 
+            StatusDisplay.Text = "Complete 🔊"
+
         End If
 
         RatioDegDuration = 360 / Duration.TotalSeconds
@@ -1136,6 +1146,8 @@ Public Class Form1
             InitialEntry = Duration.Hours.ToString & Duration.Minutes.ToString & Duration.Seconds.ToString
 
             TimerState = AppState.Running
+
+            StatusDisplay.Text = "Running 🏃‍"
 
             StartTime = Now
 
@@ -1467,7 +1479,7 @@ Public Class Form1
         End If
 
         ' Set the font size for the  display based on the width of the client rectangle
-        StatusDisplay.Font = New Font("Segoe UI",
+        StatusDisplay.Font = New Font("Segoe UI Symbol",
                                     FontSize,
                                     FontStyle.Regular)
 
