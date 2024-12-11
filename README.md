@@ -4,7 +4,7 @@ This application is designed to provide an intuitive and user-friendly countdown
 
 
 
-![003](https://github.com/user-attachments/assets/1d9c2ee4-a51a-4205-861e-e84836490c78)
+![004](https://github.com/user-attachments/assets/abc62a9e-fb52-4d3f-b583-c895b73fe778)
 
 
 
