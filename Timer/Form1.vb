@@ -777,8 +777,6 @@ Public Class Form1
 
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
-                            ' TODO: Status Display "Completed"
-
                             .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
 
                         Case AppState.Running
@@ -795,8 +793,6 @@ Public Class Form1
 
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
-                            ' TODO: Status Display "Running"
-
                             .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
 
                         Case AppState.Stopped
@@ -810,8 +806,6 @@ Public Class Form1
                             FillRoundedRectangle(Brushes.White, RestartButton.Rect, RestartButton.Radius, Buffer.Graphics)
 
                             .DrawString(RestartButton.Text, RestartButton.Font, Brushes.Black, RestartButton.TextLocation, AlineCenterMiddle)
-
-                            ' TODO: Status Display "Stopped"
 
                             .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
 
@@ -846,8 +840,6 @@ Public Class Form1
                             .DrawString(ResumeButton.Text, ResumeButton.Font, Brushes.Black, ResumeButton.TextLocation, AlineCenterMiddle)
 
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
-
-                            ' TODO: Status Display "Paused"
 
                             .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
 
