@@ -742,15 +742,17 @@ Public Class Form1
 
                         Case AppState.Completed
 
-                            .Clear(Color.LightSkyBlue)
+                            .Clear(Color.Gray)
 
                             .DrawEllipse(CircleOfProgressBackgroundPen, CircleOfProgress)
 
-                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.MidnightBlue, MainDisplay.Location, AlineCenterMiddle)
+                            .DrawString(MainDisplay.Text, MainDisplay.Font, Brushes.White, MainDisplay.Location, AlineCenterMiddle)
 
                             FillRoundedRectangle(Brushes.White, StopButton.Rect, StopButton.Radius, Buffer.Graphics)
 
                             .DrawString(StopButton.Text, StopButton.Font, Brushes.DimGray, StopButton.TextLocation, AlineCenterMiddle)
+
+                            .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
                         Case AppState.Running
 
@@ -842,7 +844,7 @@ Public Class Form1
 
             Case AppState.Completed
 
-                MainDisplay.Text = "0"
+                'MainDisplay.Text = "0"
 
             Case AppState.Stopped
 
@@ -1017,6 +1019,8 @@ Public Class Form1
 
         ' Check if timer should complete
         If ElapsedTime.TotalSeconds >= Duration.TotalSeconds Then
+
+            MainDisplay.Text = "0"
 
             TimerState = AppState.Completed
 
