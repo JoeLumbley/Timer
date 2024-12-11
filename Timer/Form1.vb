@@ -99,6 +99,13 @@ Public Class Form1
 
     Private InitialDisplay As DisplayObject
 
+
+    Private StatusDisplay As DisplayObject
+
+
+
+
+
     Private CircleOfProgress As Rectangle
 
     Private CircleOfProgressPen As Pen
@@ -756,6 +763,8 @@ Public Class Form1
 
                             ' TODO: Status Display "Completed"
 
+                            .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
+
                         Case AppState.Running
 
                             .Clear(Color.Black)
@@ -772,6 +781,8 @@ Public Class Form1
 
                             ' TODO: Status Display "Running"
 
+                            .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
+
                         Case AppState.Stopped
 
                             .Clear(Color.Black)
@@ -785,6 +796,8 @@ Public Class Form1
                             .DrawString(RestartButton.Text, RestartButton.Font, Brushes.Black, RestartButton.TextLocation, AlineCenterMiddle)
 
                             ' TODO: Status Display "Stopped"
+
+                            .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
 
                         Case AppState.Initial
 
@@ -819,6 +832,9 @@ Public Class Form1
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
                             ' TODO: Status Display "Paused"
+
+                            .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
+
 
                     End Select
 
