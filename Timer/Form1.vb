@@ -99,12 +99,7 @@ Public Class Form1
 
     Private InitialDisplay As DisplayObject
 
-
     Private StatusDisplay As DisplayObject
-
-
-
-
 
     Private CircleOfProgress As Rectangle
 
