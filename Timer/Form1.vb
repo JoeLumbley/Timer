@@ -1064,7 +1064,7 @@ Public Class Form1
 
             TimerState = AppState.Completed
 
-            StatusDisplay.Text = "Complete 🔊"
+            StatusDisplay.Text = "Complete ⏰⚟"
 
         End If
 
@@ -1456,13 +1456,13 @@ Public Class Form1
 
         Dim FontSize As Single
 
-        If ClientSize.Height / 75 > 6 Then
+        If ClientSize.Height / 52 > 9 Then
 
-            FontSize = ClientSize.Height / 75
+            FontSize = ClientSize.Height / 52
 
         Else
 
-            FontSize = 6
+            FontSize = 9
 
         End If
 
@@ -1486,7 +1486,7 @@ Public Class Form1
         ' Center the main display in the client rectangle.
         StatusDisplay.Location.X = ClientSize.Width / 2
 
-        StatusDisplay.Location.Y = ClientSize.Height / 2 + ButtonSize * 3
+        StatusDisplay.Location.Y = ClientSize.Height / 2 - ButtonSize * 3.5
 
     End Sub
 
