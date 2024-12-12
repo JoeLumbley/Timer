@@ -384,6 +384,7 @@ End Sub
 - **Graphics Drawing**: Uses the `With` statement to simplify drawing operations based on the current timer state.
 - **Error Handling**: Catches any exceptions during drawing and prints an error message.
 
+---
 
 
 
@@ -393,10 +394,149 @@ End Sub
 
 
 
+### Start Timer Method
+
+```vb
+
+    Private Sub StartTimer()
+
+        ' Did the user enter a duration?
+        If Not InitialEntry = String.Empty Then
+            ' Yes, the user did enter a duration.
+
+            ' Ensure the input string is padded to at least 6 digits
+            Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
+
+            ' Extract hours, minutes, and seconds from the string
+            Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
+            Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
+            Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
+
+            If hours > 23 Then hours = 23
+            If minutes > 59 Then minutes = 59
+            If seconds > 59 Then seconds = 59
+
+            ' Create and return the TimeSpan
+            Duration = New TimeSpan(hours, minutes, seconds)
+
+            InitialEntry = Duration.Hours.ToString & Duration.Minutes.ToString & Duration.Seconds.ToString
+
+            TimerState = AppState.Running
+
+            StatusDisplay.Text = "Running 🏃‍"
+
+            StartTime = Now
+
+        End If
+
+    End Sub
+
+```
+
+
+This method is designed to start a timer based on user input. It takes a string input representing a duration in the format of hours, minutes, and seconds, processes it, and starts the timer if the input is valid.
+
+```vb
+Private Sub StartTimer()
+```
+- **Private Sub StartTimer()**: This line defines a new method called `StartTimer`. The keyword `Private` means that this method can only be accessed from within the same class. `Sub` indicates that this is a subroutine, which is a block of code that performs a task but does not return a value.
+
+```vb
+    ' Did the user enter a duration?
+    If Not InitialEntry = String.Empty Then
+```
+- **If Not InitialEntry = String.Empty Then**: This line checks if the variable `InitialEntry` is not empty. `InitialEntry` is expected to contain the user’s input for the duration. If `InitialEntry` is empty, the code inside this `If` block will not execute. `String.Empty` is a way to represent an empty string in VB.NET.
+
+```vb
+        ' Yes, the user did enter a duration.
+```
+- This comment indicates that the following code will run only if the user has indeed entered a duration.
+
+```vb
+        ' Ensure the input string is padded to at least 6 digits
+        Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)
+```
+- **Dim PaddedInitialEntry = InitialEntry.PadLeft(6, "0"c)**: This line creates a new variable called `PaddedInitialEntry`. The `PadLeft` method is used to ensure that the string `InitialEntry` has at least 6 characters. If `InitialEntry` is shorter than 6 characters, it adds leading zeros (`"0"c`) to the left until it reaches a length of 6. For example, if the user enters `123`, it becomes `000123`.
+
+```vb
+        ' Extract hours, minutes, and seconds from the string
+        Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))
+```
+- **Dim hours As Integer = Integer.Parse(PaddedInitialEntry.Substring(0, 2))**: This line extracts the first two characters from `PaddedInitialEntry`, which represent the hours, and converts them into an integer. The `Substring(0, 2)` method gets the characters starting at index 0 for a length of 2. For instance, from `000123`, it gets `00` and converts it to `0`.
+
+```vb
+        Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
+```
+- **Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))**: Similarly, this line extracts the next two characters (at index 2) for the minutes and converts them into an integer.
+
+```vb
+        Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
+```
+- **Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))**: This line extracts the last two characters (at index 4) for the seconds and converts them into an integer.
+
+```vb
+        If hours > 23 Then hours = 23
+```
+- **If hours > 23 Then hours = 23**: This line checks if the extracted hours exceed 23 (the maximum valid hour in a 24-hour format). If so, it sets `hours` to 23. This prevents invalid hour values.
+
+```vb
+        If minutes > 59 Then minutes = 59
+```
+- **If minutes > 59 Then minutes = 59**: Similar to the previous line, this checks if the minutes exceed 59. If they do, it sets `minutes` to 59 to ensure valid minute values.
+
+```vb
+        If seconds > 59 Then seconds = 59
+```
+- **If seconds > 59 Then seconds = 59**: This line checks if the seconds exceed 59. If they do, it sets `seconds` to 59 to maintain valid second values.
+
+```vb
+        ' Create and return the TimeSpan
+        Duration = New TimeSpan(hours, minutes, seconds)
+```
+- **Duration = New TimeSpan(hours, minutes, seconds)**: This line creates a new `TimeSpan` object using the validated hours, minutes, and seconds. `TimeSpan` is a structure in .NET that represents a time interval. The `Duration` variable will now hold the time span based on the user’s input.
+
+```vb
+        InitialEntry = Duration.Hours.ToString & Duration.Minutes.ToString & Duration.Seconds.ToString
+```
+- **InitialEntry = Duration.Hours.ToString & Duration.Minutes.ToString & Duration.Seconds.ToString**: This line updates the `InitialEntry` variable to a string that concatenates the hours, minutes, and seconds from the `Duration` object. This might be used later for display or processing.
+
+```vb
+        TimerState = AppState.Running
+```
+- **TimerState = AppState.Running**: This line sets the `TimerState` variable to indicate that the timer is now in the "Running" state. `AppState` is likely an enumeration that defines different states the application can be in.
+
+```vb
+        StatusDisplay.Text = "Running 🏃‍"
+```
+- **StatusDisplay.Text = "Running 🏃‍"**: This line updates a user interface element (likely a label or text box) to display the message "Running 🏃‍". This provides feedback to the user that the timer has started.
+
+```vb
+        StartTime = Now
+```
+- **StartTime = Now**: This line captures the current date and time when the timer starts. `Now` is a built-in function in VB.NET that returns the current date and time.
+
+```vb
+    End If
+```
+- **End If**: This line marks the end of the `If` block that checks if the `InitialEntry` is not empty.
+
+```vb
+End Sub
+```
+- **End Sub**: This line indicates the end of the `StartTimer` subroutine.
+
+
+The `StartTimer` method processes user input for a timer, ensuring it is valid and formatted correctly. It extracts the hours, minutes, and seconds, creates a `TimeSpan` object, updates the application's state to "Running," and provides feedback to the user. This method is essential for starting a timer in a user-friendly way.
 
 
 
 
+
+
+
+
+
+---
 
 
 
