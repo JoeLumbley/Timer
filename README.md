@@ -493,6 +493,16 @@ Private Sub StartTimer()
 ```
 - **If seconds > 59 Then seconds = 59**: This line checks if the seconds exceed 59. If they do, it sets `seconds` to 59 to maintain valid second values.
 
+
+
+
+[Read](https://learn.microsoft.com/en-us/dotnet/api/system.timespan.-ctor?view=net-9.0#system-timespan-ctor(system-int32-system-int32-system-int32)) TimeSpan Constructors - learn.microsoft.com
+
+
+
+[Read](https://learn.microsoft.com/en-us/dotnet/api/system.timespan.maxvalue?view=net-9.0) TimeSpan.MaxValue - learn.microsoft.com
+
+
 ```vb
         ' Create and return the TimeSpan
         Duration = New TimeSpan(hours, minutes, seconds)
