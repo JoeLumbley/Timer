@@ -1123,8 +1123,12 @@ Public Class Form1
             Dim minutes As Integer = Integer.Parse(PaddedInitialEntry.Substring(2, 2))
             Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
 
+            ' Validate the Input
+            ' Limit hours to a max of 23.
             If hours > 23 Then hours = 23
+            ' Limit minutes to a max of 59.
             If minutes > 59 Then minutes = 59
+            ' Limit seconds to a max of 59.
             If seconds > 59 Then seconds = 59
 
             ' Create and return the TimeSpan
