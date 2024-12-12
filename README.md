@@ -496,7 +496,7 @@ Private Sub StartTimer()
 
 
 
-[Read](https://learn.microsoft.com/en-us/dotnet/api/system.timespan.-ctor?view=net-9.0) TimeSpan Constructors - learn.microsoft.com
+
 
 
 
@@ -508,6 +508,8 @@ Private Sub StartTimer()
         Duration = New TimeSpan(hours, minutes, seconds)
 ```
 - **Duration = New TimeSpan(hours, minutes, seconds)**: This line creates a new `TimeSpan` object using the validated hours, minutes, and seconds. `TimeSpan` is a structure in .NET that represents a time interval. The `Duration` variable will now hold the time span based on the user’s input.
+
+[Read](https://learn.microsoft.com/en-us/dotnet/api/system.timespan.-ctor?view=net-9.0) TimeSpan Constructors - learn.microsoft.com
 
 ```vb
         InitialEntry = Duration.Hours.ToString & Duration.Minutes.ToString & Duration.Seconds.ToString
