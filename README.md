@@ -496,7 +496,7 @@ Private Sub StartTimer()
 
 
 
-[Read](https://learn.microsoft.com/en-us/dotnet/api/system.timespan.-ctor?view=net-9.0#system-timespan-ctor(system-int32-system-int32-system-int32)) TimeSpan Constructors - learn.microsoft.com
+[Read](https://learn.microsoft.com/en-us/dotnet/api/system.timespan.-ctor?view=net-9.0) TimeSpan Constructors - learn.microsoft.com
 
 
 
