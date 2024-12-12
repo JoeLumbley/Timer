@@ -398,7 +398,7 @@ End Sub
 
 ```vb
 
-        Private Sub StartTimer()
+    Private Sub StartTimer()
 
         ' Did the user enter a duration?
         If Not InitialEntry = String.Empty Then
@@ -413,11 +413,11 @@ End Sub
             Dim seconds As Integer = Integer.Parse(PaddedInitialEntry.Substring(4, 2))
 
             ' Validate the Input
-            ' Do hours exceed 23 (the maximum valid hours) if so limit to 23.
+            ' Limit hours to a max of 23.
             If hours > 23 Then hours = 23
-            ' Do minutes exceed 59 (the maximum valid minutes) if so limit to 59.
+            ' Limit minutes to a max of 59.
             If minutes > 59 Then minutes = 59
-            ' Do seconds exceed 59 (the maximum valid seconds) if so limit to 59.
+            ' Limit seconds to a max of 59.
             If seconds > 59 Then seconds = 59
 
             ' Create and return the TimeSpan
