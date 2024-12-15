@@ -287,103 +287,19 @@ Public Class Form1
 
             Case Keys.Back
 
-                Select Case TimerState
-
-                    Case AppState.Stopped
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Paused
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Running
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Initial
-
-                        DeleteLastInitialEntryCharacter()
-
-                End Select
-
-                'ReturnToInitialEntryScreen()
-
-                'DeleteLastInitialEntryCharacter()
+                DeleteCharacterOrReturnToInitalState()
 
             Case Keys.Delete
 
-                Select Case TimerState
-
-                    Case AppState.Stopped
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Paused
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Running
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Initial
-
-                        DeleteLastInitialEntryCharacter()
-
-                End Select
-
-                'ReturnToInitialEntryScreen()
-
-                'DeleteLastInitialEntryCharacter()
+                DeleteCharacterOrReturnToInitalState()
 
             Case Keys.X
 
-                Select Case TimerState
-
-                    Case AppState.Stopped
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Paused
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Running
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Initial
-
-                        DeleteLastInitialEntryCharacter()
-
-                End Select
-
-                'ReturnToInitialEntryScreen()
-
-                'DeleteLastInitialEntryCharacter()
+                DeleteCharacterOrReturnToInitalState()
 
             Case Keys.Escape
 
-                Select Case TimerState
-
-                    Case AppState.Stopped
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Paused
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Running
-
-                        TimerState = AppState.Initial
-
-                    Case AppState.Initial
-
-                        DeleteLastInitialEntryCharacter()
-
-                End Select
+                DeleteCharacterOrReturnToInitalState()
 
             Case Keys.Pause
 
@@ -394,8 +310,6 @@ Public Class Form1
                 TogglePause()
 
             Case Keys.D0
-
-                ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -408,6 +322,10 @@ Public Class Form1
                         End If
 
                     End If
+
+                Else
+
+                    TimerState = AppState.Initial
 
                 End If
 
@@ -717,6 +635,26 @@ Public Class Form1
 
     End Sub
 
+    Private Sub DeleteCharacterOrReturnToInitalState()
+        'DeleteCharacterOrReturnToInitalState
+        If TimerState = AppState.Initial Then
+
+            ' Are there character to delete?
+            If InitialEntry.Length > 0 Then
+                ' Yes, there are character to delete.
+
+                ' Delete the last character in the initial entry string.
+                InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
+
+            End If
+
+        Else
+
+            TimerState = AppState.Initial
+
+        End If
+    End Sub
+
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
 
         CloseSounds()
@@ -816,6 +754,15 @@ Public Class Form1
                     PauseSound("timesup")
 
                 End If
+
+            Case AppState.Initial
+
+                If IsPlaying("timesup") Then
+
+                    PauseSound("timesup")
+
+                End If
+
 
         End Select
 
