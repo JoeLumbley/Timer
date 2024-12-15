@@ -287,21 +287,81 @@ Public Class Form1
 
             Case Keys.Back
 
-                ReturnToInitialEntryScreen()
+                Select Case TimerState
 
-                DeleteLastInitialEntryCharacter()
+                    Case AppState.Stopped
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Paused
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Running
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Initial
+
+                        DeleteLastInitialEntryCharacter()
+
+                End Select
+
+                'ReturnToInitialEntryScreen()
+
+                'DeleteLastInitialEntryCharacter()
 
             Case Keys.Delete
 
-                ReturnToInitialEntryScreen()
+                Select Case TimerState
 
-                DeleteLastInitialEntryCharacter()
+                    Case AppState.Stopped
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Paused
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Running
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Initial
+
+                        DeleteLastInitialEntryCharacter()
+
+                End Select
+
+                'ReturnToInitialEntryScreen()
+
+                'DeleteLastInitialEntryCharacter()
 
             Case Keys.X
 
-                ReturnToInitialEntryScreen()
+                Select Case TimerState
 
-                DeleteLastInitialEntryCharacter()
+                    Case AppState.Stopped
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Paused
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Running
+
+                        TimerState = AppState.Initial
+
+                    Case AppState.Initial
+
+                        DeleteLastInitialEntryCharacter()
+
+                End Select
+
+                'ReturnToInitialEntryScreen()
+
+                'DeleteLastInitialEntryCharacter()
 
             Case Keys.Escape
 
