@@ -521,7 +521,7 @@ Public Class Form1
 
             Case Keys.NumPad1
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -531,11 +531,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad2
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -545,11 +549,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad3
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -559,11 +567,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad4
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -573,11 +585,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad5
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -587,11 +603,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad6
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -601,11 +621,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad7
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -615,11 +639,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad8
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -629,11 +657,15 @@ Public Class Form1
 
                     End If
 
+                Else
+
+                    TimerState = AppState.Initial
+
                 End If
 
             Case Keys.NumPad9
 
-                ReturnToInitialEntryScreen()
+                'ReturnToInitialEntryScreen()
 
                 If TimerState = AppState.Initial Then
 
@@ -642,6 +674,10 @@ Public Class Form1
                         InitialEntry = InitialEntry & "9"
 
                     End If
+
+                Else
+
+                    TimerState = AppState.Initial
 
                 End If
 
