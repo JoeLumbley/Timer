@@ -682,7 +682,7 @@ Public Class Form1
     End Sub
 
     Private Sub DeleteCharacterOrReturnToInitalState()
-        'DeleteCharacterOrReturnToInitalState
+
         If TimerState = AppState.Initial Then
 
             ' Are there character to delete?
@@ -699,6 +699,7 @@ Public Class Form1
             TimerState = AppState.Initial
 
         End If
+
     End Sub
 
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
