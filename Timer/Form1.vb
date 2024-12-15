@@ -101,6 +101,13 @@ Public Class Form1
 
     Private StatusDisplay As DisplayObject
 
+    Private RemainingDisplay As DisplayObject
+
+    Private ElapsedDisplay As DisplayObject
+
+
+
+
     Private CircleOfProgress As Rectangle
 
     Private CircleOfProgressPen As Pen
@@ -154,6 +161,8 @@ Public Class Form1
 
         StatusDisplay.Text = "Initial"
 
+        RemainingDisplay.Text = "Remaining"
+
         Timer1.Interval = 15
 
         Timer1.Enabled = True
@@ -183,6 +192,10 @@ Public Class Form1
             ResizeCircleOfProgress()
 
             ResizeStatusDisplay()
+
+            ResizeRemainingDisplay()
+
+            ResizeElapsedDisplay()
 
             DisposeBuffer()
 
@@ -790,6 +803,13 @@ Public Class Form1
 
                             .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
 
+                            'TODO: Add elapsed time display
+                            'TODO: Add remaining time lable
+
+                            .DrawString(RemainingDisplay.Text, RemainingDisplay.Font, Brushes.White, RemainingDisplay.Location, AlineCenterMiddle)
+
+                            .DrawString(ElapsedDisplay.Text, ElapsedDisplay.Font, Brushes.White, ElapsedDisplay.Location, AlineCenterMiddle)
+
                         Case AppState.Stopped
 
                             .Clear(Color.Black)
@@ -1002,6 +1022,8 @@ Public Class Form1
     Private Sub UpdateMainDisplayRunning()
 
         ElapsedTime = DateTime.Now - StartTime
+
+        ElapsedDisplay.Text = ElapsedTime.ToString("h\:mm\:ss")
 
         Dim RemainingTime As TimeSpan = Duration - ElapsedTime
 
@@ -1478,6 +1500,83 @@ Public Class Form1
         StatusDisplay.Location.X = ClientSize.Width / 2
 
         StatusDisplay.Location.Y = ClientSize.Height / 2 - ButtonSize * 3.5
+
+    End Sub
+
+
+    Private Sub ResizeElapsedDisplay()
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 70 > 5 Then
+
+            FontSize = ClientSize.Height / 70
+
+        Else
+
+            FontSize = 5
+
+        End If
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        ' Set the font size for the  display based on the width of the client rectangle
+        ElapsedDisplay.Font = New Font("Segoe UI Symbol",
+                                    FontSize,
+                                    FontStyle.Regular)
+
+        ' Center the main display in the client rectangle.
+        ElapsedDisplay.Location.X = ClientSize.Width / 2
+
+        ElapsedDisplay.Location.Y = ClientSize.Height / 2 - ButtonSize * 2.5
+
+    End Sub
+
+    Private Sub ResizeRemainingDisplay()
+
+        Dim FontSize As Single
+
+        If ClientSize.Height / 95 > 5 Then
+
+            FontSize = ClientSize.Height / 95
+
+        Else
+
+            FontSize = 5
+
+        End If
+
+        Dim ButtonSize As Integer
+
+        If ClientSize.Height / 14 > 32 Then
+
+            ButtonSize = ClientSize.Height / 14
+
+        Else
+
+            ButtonSize = 32
+
+        End If
+
+        ' Set the font size for the  display based on the width of the client rectangle
+        RemainingDisplay.Font = New Font("Segoe UI Symbol",
+                                    FontSize,
+                                    FontStyle.Regular)
+
+        ' Center the main display in the client rectangle.
+        RemainingDisplay.Location.X = ClientSize.Width / 2
+
+        RemainingDisplay.Location.Y = ClientSize.Height / 2 + ButtonSize * 1.1
 
     End Sub
 
