@@ -1238,9 +1238,6 @@ Public Class Form1
             ' Create and return the TimeSpan
             Duration = New TimeSpan(hours, minutes, seconds)
 
-
-
-
             ' Do we have hours?
             If Duration.Hours > 0 Then
                 ' Yes, we have hours.
@@ -1261,31 +1258,12 @@ Public Class Form1
                 Else
                     ' No, we don't have minutes.
 
-                    ' Do we have seconds?
-                    'If Duration.Seconds > 0 Then
-                    ' Yes, we have seconds.
-
                     ' Show seconds.
                     InitialEntry = Duration.Seconds.ToString
-
-                    'Else
-                    ' No, we don't have seconds.
-
-                    ' Show milliseconds.
-                    'MainDisplay.Text = Duration.ToString("ff").TrimStart("0")
-
-                    'End If
 
                 End If
 
             End If
-
-
-
-
-
-
-            'InitialEntry = Duration.Hours.ToString("D2") & Duration.Minutes.ToString("D2") & Duration.Seconds.ToString("D2")
 
             TimerState = AppState.Running
 
