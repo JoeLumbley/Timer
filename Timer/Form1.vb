@@ -73,7 +73,6 @@ Public Class Form1
 
     Private Sounds() As String
 
-
     Private Context As BufferedGraphicsContext
     Private Buffer As BufferedGraphics
 
@@ -104,9 +103,6 @@ Public Class Form1
     Private RemainingDisplay As DisplayObject
 
     Private ElapsedDisplay As DisplayObject
-
-
-
 
     Private CircleOfProgress As Rectangle
 
@@ -144,10 +140,6 @@ Public Class Form1
     Private IsDeleteKeyDown As Boolean = False
     Private IsXKeyDown As Boolean = False
     Private IsEscapeKeyDown As Boolean = False
-
-
-
-
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -718,6 +710,42 @@ Public Class Form1
                     End Select
 
                 End If
+
+        End Select
+
+    End Sub
+
+    Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+
+        Select Case e.KeyValue
+
+            Case Keys.Pause
+
+                IsPauseKeyDown = False
+
+            Case Keys.P
+
+                IsPKeyDown = False
+
+            Case Keys.Enter
+
+                IsEnterKeyDown = False
+
+            Case Keys.Back
+
+                IsBackKeyDown = False
+
+            Case Keys.Delete
+
+                IsDeleteKeyDown = False
+
+            Case Keys.X
+
+                IsXKeyDown = False
+
+            Case Keys.Escape
+
+                IsEscapeKeyDown = False
 
         End Select
 
@@ -2035,42 +2063,6 @@ Public Class Form1
             IO.File.WriteAllBytes(FilePath, My.Resources.Resource1.TimesUp)
 
         End If
-
-    End Sub
-
-    Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-
-        Select Case e.KeyValue
-
-            Case Keys.Pause
-
-                IsPauseKeyDown = False
-
-            Case Keys.P
-
-                IsPKeyDown = False
-
-            Case Keys.Enter
-
-                IsEnterKeyDown = False
-
-            Case Keys.Back
-
-                IsBackKeyDown = False
-
-            Case Keys.Delete
-
-                IsDeleteKeyDown = False
-
-            Case Keys.X
-
-                IsXKeyDown = False
-
-            Case Keys.Escape
-
-                IsEscapeKeyDown = False
-
-        End Select
 
     End Sub
 
