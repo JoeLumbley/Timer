@@ -137,6 +137,15 @@ Public Class Form1
 
     Private ReadOnly EmojiFont As New Font("Segoe UI Emoji", 25)
 
+    Private IsPauseKeyDown As Boolean = False
+    Private IsPKeyDown As Boolean = False
+    Private IsEnterKeyDown As Boolean = False
+    Private IsBackKeyDown As Boolean = False
+
+
+
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeForm()
@@ -287,7 +296,13 @@ Public Class Form1
 
             Case Keys.Back
 
-                DeleteCharacterOrReturnToInitalState()
+                If Not IsBackKeyDown Then
+
+                    IsBackKeyDown = True
+
+                    DeleteCharacterOrReturnToInitalState()
+
+                End If
 
             Case Keys.Delete
 
@@ -303,11 +318,23 @@ Public Class Form1
 
             Case Keys.Pause
 
-                TogglePause()
+                If Not IsPauseKeyDown Then
+
+                    IsPauseKeyDown = True
+
+                    TogglePause()
+
+                End If
 
             Case Keys.P
 
-                TogglePause()
+                If Not IsPKeyDown Then
+
+                    IsPKeyDown = True
+
+                    TogglePause()
+
+                End If
 
             Case Keys.D0
 
@@ -635,35 +662,41 @@ Public Class Form1
 
             Case Keys.Enter
 
-                Select Case TimerState
+                If Not IsEnterKeyDown Then
 
-                    Case AppState.Initial
+                    IsEnterKeyDown = True
 
-                        StartTimer()
+                    Select Case TimerState
 
-                    Case AppState.Stopped
+                        Case AppState.Initial
 
-                        TimerState = AppState.Running
+                            StartTimer()
 
-                        StatusDisplay.Text = "Running 🏃‍"
+                        Case AppState.Stopped
 
-                        StartTime = Now
+                            TimerState = AppState.Running
 
-                    Case AppState.Completed
+                            StatusDisplay.Text = "Running 🏃‍"
 
-                        TimerState = AppState.Stopped
+                            StartTime = Now
 
-                        StatusDisplay.Text = "Stopped ⯃"
+                        Case AppState.Completed
 
-                    Case AppState.Paused
+                            TimerState = AppState.Stopped
 
-                        TogglePause()
+                            StatusDisplay.Text = "Stopped ⯃"
 
-                    Case AppState.Running
+                        Case AppState.Paused
 
-                        TogglePause()
+                            TogglePause()
 
-                End Select
+                        Case AppState.Running
+
+                            TogglePause()
+
+                    End Select
+
+                End If
 
         End Select
 
@@ -1163,17 +1196,19 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ReturnToInitialEntryScreen()
+    'Private Sub ReturnToInitialEntryScreen()
 
-        If TimerState = AppState.Stopped Then
+    '    If TimerState = AppState.Stopped Then
 
-            TimerState = AppState.Initial
+    '        TimerState = AppState.Initial
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub StartTimer()
+
+        If CInt(InitialEntry) = 0 Then InitialEntry = String.Empty
 
         ' Did the user enter a duration?
         If Not InitialEntry = String.Empty Then
@@ -1198,7 +1233,7 @@ Public Class Form1
             ' Create and return the TimeSpan
             Duration = New TimeSpan(hours, minutes, seconds)
 
-            InitialEntry = Duration.Hours.ToString & Duration.Minutes.ToString & Duration.Seconds.ToString
+            InitialEntry = Duration.Hours.ToString("D2") & Duration.Minutes.ToString("D2") & Duration.Seconds.ToString("D2")
 
             TimerState = AppState.Running
 
@@ -1210,22 +1245,22 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DeleteLastInitialEntryCharacter()
+    'Private Sub DeleteLastInitialEntryCharacter()
 
-        If TimerState = AppState.Initial Then
+    '    If TimerState = AppState.Initial Then
 
-            ' Are there character to delete?
-            If InitialEntry.Length > 0 Then
-                ' Yes, there are character to delete.
+    '        ' Are there character to delete?
+    '        If InitialEntry.Length > 0 Then
+    '            ' Yes, there are character to delete.
 
-                ' Delete the last character in the initial entry string.
-                InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
+    '            ' Delete the last character in the initial entry string.
+    '            InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
 
-            End If
+    '        End If
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub ResizeResumeButton()
 
@@ -1987,6 +2022,30 @@ Public Class Form1
             IO.File.WriteAllBytes(FilePath, My.Resources.Resource1.TimesUp)
 
         End If
+
+    End Sub
+
+    Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+
+        Select Case e.KeyValue
+
+            Case Keys.Pause
+
+                IsPauseKeyDown = False
+
+            Case Keys.P
+
+                IsPKeyDown = False
+
+            Case Keys.Enter
+
+                IsEnterKeyDown = False
+
+            Case Keys.Back
+
+                IsBackKeyDown = False
+
+        End Select
 
     End Sub
 
