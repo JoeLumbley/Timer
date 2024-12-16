@@ -141,6 +141,9 @@ Public Class Form1
     Private IsPKeyDown As Boolean = False
     Private IsEnterKeyDown As Boolean = False
     Private IsBackKeyDown As Boolean = False
+    Private IsDeleteKeyDown As Boolean = False
+    Private IsXKeyDown As Boolean = False
+    Private IsEscapeKeyDown As Boolean = False
 
 
 
@@ -306,15 +309,33 @@ Public Class Form1
 
             Case Keys.Delete
 
-                DeleteCharacterOrReturnToInitalState()
+                If Not IsDeleteKeyDown Then
+
+                    IsDeleteKeyDown = True
+
+                    DeleteCharacterOrReturnToInitalState()
+
+                End If
 
             Case Keys.X
 
-                DeleteCharacterOrReturnToInitalState()
+                If Not IsXKeyDown Then
+
+                    IsXKeyDown = True
+
+                    DeleteCharacterOrReturnToInitalState()
+
+                End If
 
             Case Keys.Escape
 
-                DeleteCharacterOrReturnToInitalState()
+                If Not IsEscapeKeyDown Then
+
+                    IsEscapeKeyDown = True
+
+                    DeleteCharacterOrReturnToInitalState()
+
+                End If
 
             Case Keys.Pause
 
@@ -831,7 +852,6 @@ Public Class Form1
 
                 End If
 
-
         End Select
 
     End Sub
@@ -877,9 +897,6 @@ Public Class Form1
                             .DrawArc(CircleOfProgressPen, CircleOfProgress, startAngle, sweepAngle)
 
                             .DrawString(StatusDisplay.Text, StatusDisplay.Font, Brushes.White, StatusDisplay.Location, AlineCenterMiddle)
-
-                            'TODO: Add elapsed time display
-                            'TODO: Add remaining time lable
 
                             .DrawString(RemainingDisplay.Text, RemainingDisplay.Font, Brushes.White, RemainingDisplay.Location, AlineCenterMiddle)
 
@@ -1196,19 +1213,7 @@ Public Class Form1
 
     End Sub
 
-    'Private Sub ReturnToInitialEntryScreen()
-
-    '    If TimerState = AppState.Stopped Then
-
-    '        TimerState = AppState.Initial
-
-    '    End If
-
-    'End Sub
-
     Private Sub StartTimer()
-
-        If CInt(InitialEntry) = 0 Then InitialEntry = String.Empty
 
         ' Did the user enter a duration?
         If Not InitialEntry = String.Empty Then
@@ -1233,7 +1238,54 @@ Public Class Form1
             ' Create and return the TimeSpan
             Duration = New TimeSpan(hours, minutes, seconds)
 
-            InitialEntry = Duration.Hours.ToString("D2") & Duration.Minutes.ToString("D2") & Duration.Seconds.ToString("D2")
+
+
+
+            ' Do we have hours?
+            If Duration.Hours > 0 Then
+                ' Yes, we have hours.
+
+                ' Show hours, minutes and seconds.
+                InitialEntry = Duration.Hours.ToString() & Duration.Minutes.ToString("D2") & Duration.Seconds.ToString("D2")
+
+            Else
+                ' No, we don't have hours.
+
+                ' Do we have minutes?
+                If Duration.Minutes > 0 Then
+                    ' Yes, we have minutes.
+
+                    ' Show minutes and seconds.
+                    InitialEntry = Duration.Minutes.ToString() & Duration.Seconds.ToString("D2")
+
+                Else
+                    ' No, we don't have minutes.
+
+                    ' Do we have seconds?
+                    'If Duration.Seconds > 0 Then
+                    ' Yes, we have seconds.
+
+                    ' Show seconds.
+                    InitialEntry = Duration.Seconds.ToString
+
+                    'Else
+                    ' No, we don't have seconds.
+
+                    ' Show milliseconds.
+                    'MainDisplay.Text = Duration.ToString("ff").TrimStart("0")
+
+                    'End If
+
+                End If
+
+            End If
+
+
+
+
+
+
+            'InitialEntry = Duration.Hours.ToString("D2") & Duration.Minutes.ToString("D2") & Duration.Seconds.ToString("D2")
 
             TimerState = AppState.Running
 
@@ -1244,23 +1296,6 @@ Public Class Form1
         End If
 
     End Sub
-
-    'Private Sub DeleteLastInitialEntryCharacter()
-
-    '    If TimerState = AppState.Initial Then
-
-    '        ' Are there character to delete?
-    '        If InitialEntry.Length > 0 Then
-    '            ' Yes, there are character to delete.
-
-    '            ' Delete the last character in the initial entry string.
-    '            InitialEntry = InitialEntry.Substring(0, InitialEntry.Length - 1)
-
-    '        End If
-
-    '    End If
-
-    'End Sub
 
     Private Sub ResizeResumeButton()
 
@@ -2044,6 +2079,18 @@ Public Class Form1
             Case Keys.Back
 
                 IsBackKeyDown = False
+
+            Case Keys.Delete
+
+                IsDeleteKeyDown = False
+
+            Case Keys.X
+
+                IsXKeyDown = False
+
+            Case Keys.Escape
+
+                IsEscapeKeyDown = False
 
         End Select
 
