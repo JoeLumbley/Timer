@@ -112,7 +112,7 @@ Public Class Form1
 
     Private RatioDegDuration As Single
 
-    ' Define the start angle in degrees at 270 ,the top or 12 o'clock.
+    ' Define the start angle at 270 degrees the top or 12 o'clock.
     Private Const startAngle As Single = 270.0F
 
     Private sweepAngle As Single
